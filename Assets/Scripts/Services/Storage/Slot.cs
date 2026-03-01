@@ -23,7 +23,9 @@ namespace Game.Services.Storage
             if (IsEmpty) return null;
 
             item.transform.SetParent(null);
-            return item;
+            var i = item;
+            item = null;
+            return i;
         }
     }
 }

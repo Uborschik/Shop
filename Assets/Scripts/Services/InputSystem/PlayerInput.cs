@@ -10,6 +10,8 @@ namespace Game.Services.InputSystem
         public Vector2 MouseDelta { get; private set; }
 
         public event Action Jump;
+        public event Action Push;
+        public event Action Pull;
 
         private readonly InputControls inputs;
 
@@ -37,7 +39,20 @@ namespace Game.Services.InputSystem
 
         public void OnJump(InputAction.CallbackContext context)
         {
-            Jump?.Invoke();
+            if (context.phase == InputActionPhase.Performed)
+                Jump?.Invoke();
+        }
+
+        public void OnPush(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+                Push?.Invoke();
+        }
+
+        public void OnPull(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+                Pull?.Invoke();
         }
     }
 }

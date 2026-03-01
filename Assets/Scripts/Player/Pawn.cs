@@ -1,4 +1,5 @@
 ﻿using Game.Items;
+using Game.Objects;
 using Game.Services.InputSystem;
 using Game.Services.Storage;
 using UnityEngine;
@@ -10,7 +11,9 @@ namespace Game.Player
     {
         [SerializeField] private Camera mainCamera;
         [SerializeField] private Inventory inventory;
-        [SerializeField] private Item prefab;
+        [SerializeField] private Item prefab_1;
+        [SerializeField] private Item prefab_2;
+        [SerializeField] private float rayDistance = 2;
         [SerializeField] private float speed = 5;
         [SerializeField] private float mouseSensitivity = 0.15f;
         [SerializeField] private float jumpForce = 20f;
@@ -21,6 +24,8 @@ namespace Game.Player
         private float verticalVelocity;
         private float verticalAngle;
 
+        public Inventory Inventory => inventory;
+
         private void Awake()
         {
             characterController = GetComponent<CharacterController>();
@@ -28,13 +33,34 @@ namespace Game.Player
             playerInput = new();
         }
 
+        private bool TryFindInteract(out IInteractable interactable)
+        {
+            if (!Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out var hit, rayDistance))
+            {
+                interactable = null;
+                return false;
+            }
+
+            if (hit.transform.TryGetComponent(out interactable))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         private void Start()
         {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
             if (inventory.Count <= 0) return;
 
             for (int i = 0; i < inventory.Count; i++)
             {
-                var obj = Instantiate(prefab);
+                var item = i % 2 == 0 ? prefab_1 : prefab_2;
+
+                var obj = Instantiate(item);
 
                 if (inventory.CanPush()) inventory.PushItem(obj);
             }
@@ -43,17 +69,37 @@ namespace Game.Player
         private void OnEnable()
         {
             playerInput.Jump += PlayerInput_Jump;
+            playerInput.Push += PlayerInput_Push;
+            playerInput.Pull += PlayerInput_Pull;
         }
 
         private void OnDisable()
         {
             playerInput.Jump -= PlayerInput_Jump;
+            playerInput.Push -= PlayerInput_Push;
+            playerInput.Pull -= PlayerInput_Pull;
         }
 
         private void PlayerInput_Jump()
         {
             if (characterController.isGrounded)
                 verticalVelocity = jumpForce;
+        }
+
+        private void PlayerInput_Push()
+        {
+            if (TryFindInteract(out var interact))
+            {
+                interact.Push(this);
+            }
+        }
+
+        private void PlayerInput_Pull()
+        {
+            if (TryFindInteract(out var interact))
+            {
+                interact.Pull(this);
+            }
         }
 
         private void Move()

@@ -4,17 +4,18 @@ using UnityEngine;
 
 namespace Game.Objects
 {
-    [RequireComponent(typeof(Inventory))]
     public class Shelf : MonoBehaviour, IInteractable
     {
+        [SerializeField] private Transform grid;
+
         private Inventory inventory;
 
         private void Awake()
         {
-            inventory = GetComponent<Inventory>();
+            inventory = new(grid);
         }
 
-        public void Push(Pawn pawn)
+        public void Interact(Pawn pawn)
         {
             if (pawn.Inventory.CanPull() && inventory.CanPush())
             {
@@ -27,7 +28,7 @@ namespace Game.Objects
             }
         }
 
-        public void Pull(Pawn pawn)
+        public void AltInteract(Pawn pawn)
         {
             if (inventory.CanPull() && pawn.Inventory.CanPush())
             {

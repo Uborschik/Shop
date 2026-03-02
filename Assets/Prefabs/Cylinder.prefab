@@ -55,7 +55,6 @@ GameObject:
   - component: {fileID: 4153765095015470633}
   - component: {fileID: 7392088080291585706}
   - component: {fileID: 4504329516609044275}
-  - component: {fileID: 2063234650587019979}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -144,18 +143,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2063234650587019979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1083151385964499523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4e576b6e0b7c964c8b4bd2d5b9aa576, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Services.Storage.Inventory
 --- !u!1 &3838815801019343578
 GameObject:
   m_ObjectHideFlags: 0

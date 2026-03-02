@@ -4,14 +4,13 @@ using UnityEngine;
 
 namespace Game.Services.Storage
 {
-
-    public class Inventory : MonoBehaviour
+    public class Inventory
     {
-        private Slot[] slots;
+        private readonly Slot[] slots;
 
         public int Count => slots.Length;
 
-        private void Awake()
+        public Inventory(Transform transform)
         {
             slots = transform.GetComponentsInChildren<Slot>();
         }

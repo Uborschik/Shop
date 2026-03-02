@@ -4,7 +4,7 @@ namespace Game.Objects
 {
     public interface IInteractable
     {
-        void Push(Pawn pawn);
-        void Pull(Pawn pawn);
+        void Interact(Pawn pawn);
+        void AltInteract(Pawn pawn);
     }
 }

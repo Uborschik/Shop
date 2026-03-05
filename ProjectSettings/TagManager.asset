@@ -12,10 +12,10 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
-  - 
-  - 
-  - 
+  - Item
+  - Object
+  - Tool
+  - Pawn
   - 
   - 
   - 

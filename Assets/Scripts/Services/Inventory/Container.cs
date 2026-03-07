@@ -1,5 +1,4 @@
-﻿using Game.Entities;
-using Game.Entities.Items;
+﻿using Game.Entities.Items;
 
 namespace Game.Services.Inventory
 {
@@ -34,7 +33,7 @@ namespace Game.Services.Inventory
         {
             if (inventory != null)
             {
-                for (int i = 0; i < inventory.Length; i++)
+                for (int i = inventory.Length - 1; i >= 0; i--)
                 {
                     if (inventory[i] != null)
                     {

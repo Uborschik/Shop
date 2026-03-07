@@ -5,8 +5,10 @@ using UnityEngine;
 namespace Game.Entities.Pawns.Player
 {
     [RequireComponent(typeof(CharacterController))]
-    public class Trader : MonoBehaviour
+    public class Trader : MonoBehaviour, IInteractor
     {
+        [SerializeField] private ToolHolder toolHolder;
+
         [Header("Settings")]
         [SerializeField] private MovementConfig movementConfig;
         [SerializeField] private TraderCameraConfig cameraConfig;
@@ -18,6 +20,8 @@ namespace Game.Entities.Pawns.Player
         private TraderLook look;
         private TraderInteraction interaction;
 
+        public ToolHolder ToolHolder => toolHolder;
+
         private void Awake()
         {
             var initialTool = transform.GetComponentInChildren<TraderTool>();
@@ -25,9 +29,9 @@ namespace Game.Entities.Pawns.Player
 
             input = new();
 
-            movement = new(() => cameraConfig.TraderCamera.transform, characterController, movementConfig);
+            movement = new(cameraConfig.TraderCamera.transform, characterController, movementConfig);
             look = new(transform, cameraConfig.TraderCamera.transform, cameraConfig);
-            interaction = new(() => cameraConfig.TraderCamera.transform, interactionDistance, initialTool);
+            interaction = new(this, cameraConfig.TraderCamera.transform, interactionDistance);
         }
 
         private void Start()
@@ -42,7 +46,7 @@ namespace Game.Entities.Pawns.Player
 
             input.Jump += OnJump;
             input.Interact += OnInteract;
-            input.AltInteract += OnAltInteract;
+            input.AltInteract += OnInteract;
         }
 
         private void OnDisable()
@@ -51,7 +55,7 @@ namespace Game.Entities.Pawns.Player
 
             input.Jump -= OnJump;
             input.Interact -= OnInteract;
-            input.AltInteract -= OnAltInteract;
+            input.AltInteract -= OnInteract;
 
             input.Dispose();
         }
@@ -68,7 +72,6 @@ namespace Game.Entities.Pawns.Player
         }
 
         private void OnJump() => movement?.Jump();
-        private void OnInteract() => interaction?.OnInteract();
-        private void OnAltInteract() => interaction?.OnAltInteract();
+        private void OnInteract(InteractionMode mode) => interaction?.OnInteract(mode);
     }
 }

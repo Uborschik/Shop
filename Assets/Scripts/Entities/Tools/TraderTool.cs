@@ -1,20 +1,20 @@
-﻿using Game.Services.Inventory;
+﻿using Game.Services.InputSystem;
 using UnityEngine;
 
 namespace Game.Entities.Tools
 {
-    public class TraderTool : MonoBehaviour, IInteractable
+    public abstract class TraderTool : MonoBehaviour, IInteractable
     {
         [field: SerializeField] public LayerMask InteractionMask { get; private set; }
 
-        public void Interact(ref TraderTool tool)
+        public void Interact(IInteractor interactor, InteractionMode mode)
         {
-            var parent = tool.transform.parent;
+            var parent = interactor.ToolHolder.Tool.transform.parent;
             transform.parent = parent;
             transform.SetPositionAndRotation(parent.position, parent.rotation);
-            Destroy(tool.gameObject);
+            Destroy(interactor.ToolHolder.Tool.gameObject);
 
-            tool = this;
+            interactor.ToolHolder.SetTool(this);
         }
     }
 }

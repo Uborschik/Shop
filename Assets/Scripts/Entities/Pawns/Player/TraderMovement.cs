@@ -13,7 +13,7 @@ namespace Game.Entities.Pawns.Player
 
     public class TraderMovement
     {
-        private readonly Func<Transform> getCameraTransform;
+        private readonly Transform cameraTransform;
         private readonly CharacterController controller;
         private Vector3 moveDirection;
         private float verticalVelocity;
@@ -21,9 +21,9 @@ namespace Game.Entities.Pawns.Player
 
         private readonly MovementConfig config;
 
-        public TraderMovement(Func<Transform> getCameraTransform, CharacterController controller, MovementConfig config)
+        public TraderMovement(Transform cameraTransform, CharacterController controller, MovementConfig config)
         {
-            this.getCameraTransform = getCameraTransform;
+            this.cameraTransform = cameraTransform;
             this.controller = controller;
 
             this.config = config;
@@ -38,7 +38,7 @@ namespace Game.Entities.Pawns.Player
             }
 
             var move = new Vector3(inputDirection.x, 0, inputDirection.y);
-            move = getCameraTransform().TransformDirection(move);
+            move = cameraTransform.TransformDirection(move);
             move.y = 0;
             moveDirection = move.normalized;
         }

@@ -1,9 +1,9 @@
-﻿using Game.Entities.Tools;
+﻿using Game.Services.InputSystem;
 
 namespace Game.Entities
 {
     public interface IInteractable
     {
-        void Interact(ref TraderTool tool);
+        void Interact(IInteractor interactor, InteractionMode mode);
     }
 }

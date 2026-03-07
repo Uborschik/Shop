@@ -1,4 +1,5 @@
 ﻿using Game.Entities.Tools;
+using Game.Services.InputSystem;
 using UnityEngine;
 
 namespace Game.Entities.Items
@@ -16,14 +17,21 @@ namespace Game.Entities.Items
             collision = GetComponent<Collider>();
         }
 
+        public void Interact(IInteractor interactor, InteractionMode mode)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void PushTo(Transform parent, Vector3 position, Quaternion rotation)
+        {
+            transform.SetParent(parent);
+            transform.SetLocalPositionAndRotation(position, rotation);
+        }
+
         public void SetActivePhysics(bool enable)
         {
             collision.enabled = enable;
             rb.SetEnabled(enable);
-        }
-
-        public void Interact(ref TraderTool tool)
-        {
         }
     }
 }

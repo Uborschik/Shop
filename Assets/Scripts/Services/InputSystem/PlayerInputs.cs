@@ -4,14 +4,20 @@ using UnityEngine.InputSystem;
 
 namespace Game.Services.InputSystem
 {
+    public enum InteractionMode : byte
+    {
+        Primary,   // Основной (например, ЛКМ)
+        Secondary  // Дополнительный (например, ПКМ)
+    }
+
     public class PlayerInputs : InputHandler
     {
         public Vector2 MovementDirection { get; private set; }
         public Vector2 MouseDelta { get; private set; }
 
         public event Action Jump;
-        public event Action Interact;
-        public event Action AltInteract;
+        public event Action<InteractionMode> Interact;
+        public event Action<InteractionMode> AltInteract;
 
         public PlayerInputs()
         {
@@ -57,13 +63,13 @@ namespace Game.Services.InputSystem
         public void OnInteract(InputAction.CallbackContext context)
         {
             if (context.phase == InputActionPhase.Performed)
-                Interact?.Invoke();
+                Interact?.Invoke(InteractionMode.Primary);
         }
 
         public void OnAltInteract(InputAction.CallbackContext context)
         {
             if (context.phase == InputActionPhase.Performed)
-                AltInteract?.Invoke();
+                AltInteract?.Invoke(InteractionMode.Secondary);
         }
     }
 }

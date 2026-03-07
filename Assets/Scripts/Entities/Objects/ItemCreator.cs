@@ -1,7 +1,6 @@
 using Game.Entities.Items;
-using Game.Entities.Pawns.Player;
 using Game.Entities.Tools;
-using Game.Services.Inventory;
+using Game.Services.InputSystem;
 using System.Collections;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ namespace Game.Entities.Objects
     public class ItemCreator : MonoBehaviour, IInteractable
     {
         [SerializeField] private Item[] prefabs;
-        [SerializeField] private PlacementGrid placement;
+        [SerializeField] private Transform placement;
         [SerializeField] private float interval;
 
         private Item createdItem;
@@ -21,13 +20,30 @@ namespace Game.Entities.Objects
             CreateItem();
         }
 
-        public void Interact(ref TraderTool tool)
+        public void Interact(IInteractor interactor, InteractionMode mode)
+        {
+            var tool = interactor.ToolHolder.Tool;
+
+            switch (mode)
+            {
+                case InteractionMode.Primary:
+                    PrimaryAction(tool);
+                    break;
+                case InteractionMode.Secondary:
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+        private void PrimaryAction(TraderTool tool)
         {
             if (createdItem == null) return;
 
-            if (tool is IContainer container)
+            if (tool is IGridStorageHolder holder)
             {
-                if (container.TryPushItem(createdItem))
+                if (holder.Storage.TryAddItem(createdItem))
                 {
                     createdItem = null;
 
@@ -45,8 +61,8 @@ namespace Game.Entities.Objects
             }
 
             var randomIndex = Random.Range(0, prefabs.Length);
-            createdItem = Instantiate(prefabs[randomIndex], placement.transform);
-            createdItem.transform.position += placement.Slots[0];
+            createdItem = Instantiate(prefabs[randomIndex], transform);
+            createdItem.transform.position = placement.position;
             createdItem.SetActivePhysics(false);
         }
 

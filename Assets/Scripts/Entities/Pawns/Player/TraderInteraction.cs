@@ -1,30 +1,32 @@
-﻿using Game.Entities.Tools;
+﻿using Game.Services.InputSystem;
 using System;
 using UnityEngine;
 
 namespace Game.Entities.Pawns.Player
 {
+    [Serializable]
     public class TraderInteraction
     {
-        private readonly Func<Transform> getCameraTransform;
+        private readonly IInteractor interactor;
+        private readonly Transform cameraTransform;
         private readonly float rayDistance;
 
-        private TraderTool tool;
-
-        public TraderInteraction(Func<Transform> getCameraTransform, float rayDistance, TraderTool tool)
+        public TraderInteraction(IInteractor interactor, Transform cameraTransform, float rayDistance)
         {
-            this.tool = tool;
-            this.getCameraTransform = getCameraTransform;
+            this.interactor = interactor;
+            this.cameraTransform = cameraTransform;
             this.rayDistance = rayDistance;
         }
 
-        public void OnInteract()
+        public void OnInteract(InteractionMode mode)
         {
-            if (Physics.Raycast(getCameraTransform().position, getCameraTransform().forward, out RaycastHit hit, rayDistance, tool.InteractionMask))
+            var mask = interactor.ToolHolder.Tool.InteractionMask;
+
+            if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, rayDistance, mask))
             {
                 if (hit.collider.TryGetComponent<IInteractable>(out var pushable))
                 {
-                    pushable?.Interact(ref tool);
+                    pushable?.Interact(interactor, mode);
                 }
             }
         }

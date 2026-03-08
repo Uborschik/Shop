@@ -7,11 +7,11 @@ namespace Game.Entities.Pawns.Player
     [Serializable]
     public class ToolHolder
     {
-        [SerializeField] private TraderTool tool;
+        [SerializeField] private Tool tool;
 
-        public TraderTool Tool => tool;
+        public Tool Tool => tool;
 
         public bool IsEmpty() => tool == null;
-        public void SetTool(TraderTool tool) => this.tool = tool;
+        public void SetTool(Tool tool) => this.tool = tool;
     }
 }

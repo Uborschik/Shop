@@ -1,12 +1,12 @@
-﻿using Game.Entities.Tools;
+﻿using Game.Entities.Pawns;
+using Game.Entities.Tools;
 using Game.Services.InputSystem;
 using Game.Services.Inventory;
-using System;
 using UnityEngine;
 
 namespace Game.Entities.Objects
 {
-    public class Shelf : MonoBehaviour, IInteractable, IGridStorageHolder
+    public class Shelf : InteractableObject, IGridStorageHolder
     {
         [SerializeField] private PlacementGrid placement;
 
@@ -19,43 +19,49 @@ namespace Game.Entities.Objects
             storage = new(placement);
         }
 
-        public void Interact(IInteractor interactor, InteractionMode mode)
+        public override InteractionResult Interact(Pawn pawn, InteractionMode mode)
         {
-            var tool = interactor.ToolHolder.Tool;
+            var tool = pawn.ToolHolder.Tool;
 
             switch (mode)
             {
                 case InteractionMode.Primary:
-                    PrimaryAction(tool);
-                    break;
+                    return PrimaryAction(tool);
                 case InteractionMode.Secondary:
-                    SecondaryAction(tool);
-                    break;
+                    return SecondaryAction(tool);
                 default:
-                    break;
+                    return InteractionResult.Failure;
             }
         }
 
-        private void PrimaryAction(TraderTool tool)
+        private InteractionResult PrimaryAction(Tool tool)
         {
             if (tool is IGridStorageHolder holder)
             {
-                if (!storage.TryGetPushIndex(out var index)) return;
-                if (!holder.Storage.TryRemoveItem(out var item)) return;
+                if (!storage.TryGetPushIndex(out var index)) return InteractionResult.Failure;
+                if (!holder.Storage.TryRemoveItem(out var item)) return InteractionResult.Failure;
 
                 item.PushTo(placement.transform, placement.Slots[index], Quaternion.identity);
 
                 storage.Push(index, item);
+
+                return InteractionResult.Success;
             }
+
+            return InteractionResult.Failure;
         }
 
-        private void SecondaryAction(TraderTool tool)
+        private InteractionResult SecondaryAction(Tool tool)
         {
             if (tool is IGridStorageHolder holder)
             {
-                if (!storage.TryRemoveItem(out var item)) return;
-                if (!holder.Storage.TryAddItem(item)) return;
+                if (!storage.TryRemoveItem(out var item)) return InteractionResult.Failure;
+                if (!holder.Storage.TryAddItem(item)) return InteractionResult.Failure;
+
+                return InteractionResult.Success;
             }
+
+            return InteractionResult.Failure;
         }
     }
 }

@@ -43,6 +43,8 @@ namespace Game.Services.Inventory
 
         public Item Pull(int index) => container.Pull(index);
 
+        public Item[] GetAll() => container.Inventory;
+
         private void PlaceItemVisuals(Item item, int index)
         {
             item.PushTo(placement.transform, placement.Slots[index], Quaternion.identity);

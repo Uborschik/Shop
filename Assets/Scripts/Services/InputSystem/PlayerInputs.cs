@@ -1,15 +1,10 @@
-﻿using System;
+﻿using Game.Entities;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Game.Services.InputSystem
 {
-    public enum InteractionMode : byte
-    {
-        Primary,   // Основной (например, ЛКМ)
-        Secondary  // Дополнительный (например, ПКМ)
-    }
-
     public class PlayerInputs : InputHandler
     {
         public Vector2 MovementDirection { get; private set; }

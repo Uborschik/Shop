@@ -68,9 +68,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ebe0704e2bb5d3498b12b35f30fe365, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.Tools.ItemTray
-  <InteractionMask>k__BackingField:
+  rayDistance: 2
+  interactionMask:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 896
   placement: {fileID: 8468737485008062427}
 --- !u!1 &8034709492230734703
 GameObject:

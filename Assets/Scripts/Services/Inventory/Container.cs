@@ -4,24 +4,23 @@ namespace Game.Services.Inventory
 {
     public class Container
     {
-        private readonly Item[] inventory;
+        public Item[] Inventory { get; private set; }
 
         public Container(int count)
         {
-            inventory = new Item[count];
+            Inventory = new Item[count];
         }
 
         public bool TryGetPushIndex(out int index)
         {
-            if (inventory != null)
+            if (Inventory != null)
             {
-                for (int i = 0; i < inventory.Length; i++)
+                for (int i = 0; i < Inventory.Length; i++)
                 {
-                    if (inventory[i] == null)
-                    {
-                        index = i;
-                        return true;
-                    }
+                    if (Inventory[i] != null) continue;
+
+                    index = i;
+                    return true;
                 }
             }
 
@@ -31,15 +30,14 @@ namespace Game.Services.Inventory
 
         public bool TryGetPullIndex(out int index)
         {
-            if (inventory != null)
+            if (Inventory != null)
             {
-                for (int i = inventory.Length - 1; i >= 0; i--)
+                for (int i = Inventory.Length - 1; i >= 0; i--)
                 {
-                    if (inventory[i] != null)
-                    {
-                        index = i;
-                        return true;
-                    }
+                    if (Inventory[i] == null) continue;
+
+                    index = i;
+                    return true;
                 }
             }
 
@@ -51,15 +49,15 @@ namespace Game.Services.Inventory
         {
             if (item == null) return;
 
-            inventory[index] = item;
+            Inventory[index] = item;
         }
 
         public Item Pull(int index)
         {
-            if (inventory == null) return null;
+            if (Inventory == null) return null;
 
-            var item = inventory[index];
-            inventory[index] = null;
+            var item = Inventory[index];
+            Inventory[index] = null;
             return item;
         }
     }

@@ -5,15 +5,14 @@ namespace Game.Services.Inventory
 {
     public class PlacementGrid : MonoBehaviour
     {
-        [SerializeField] private Vector3 size = Vector3.one;
+        [Header("Grid Settings")]
+        [SerializeField] private Vector3Int cellCount = new(1, 1, 1);
         [SerializeField] private Vector3 cellSize = new(0.2f, 0.2f, 0.2f);
-        [SerializeField] private Vector3 gap = Vector2.zero;
+        [SerializeField] private Vector3 gap = Vector3.zero;
 
-        private Vector3 center;
+        private List<Vector3> slots = new();
 
-        public IReadOnlyList<Vector3> Slots { get; private set; }
-
-        private Bounds Bounds => new(center, size);
+        public IReadOnlyList<Vector3> Slots => slots;
 
         private void Awake()
         {
@@ -22,38 +21,28 @@ namespace Game.Services.Inventory
 
         private void GenerateSlots()
         {
-            var slots = new List<Vector3>();
+            slots.Clear();
 
-            center = transform.position;
+            var countX = Mathf.Max(0, cellCount.x);
+            var countY = Mathf.Max(0, cellCount.y);
+            var countZ = Mathf.Max(0, cellCount.z);
 
-            var bounds = Bounds;
-            var effectiveSize = bounds.max - bounds.min;
+            if (countX <= 0 || countY <= 0 || countZ <= 0)
+                return;
 
-            effectiveSize.x = ClampValue(effectiveSize.x, cellSize.x, size.x);
-            effectiveSize.y = ClampValue(effectiveSize.y, cellSize.y, size.y);
-            effectiveSize.z = ClampValue(effectiveSize.z, cellSize.z, size.z);
+            var step = cellSize + gap;
 
-            if (effectiveSize.x <= 0 || effectiveSize.y <= 0 || effectiveSize.z <= 0) return;
+            var totalSize = new Vector3(
+                countX * cellSize.x + (countX - 1) * gap.x,
+                countY * cellSize.y + (countY - 1) * gap.y,
+                countZ * cellSize.z + (countZ - 1) * gap.z
+            );
 
-            var fixCellSize = cellSize + gap;
+            var startX = -totalSize.x / 2 + cellSize.x / 2;
+            var startY = cellSize.y / 2;
+            var startZ = -totalSize.z / 2 + cellSize.z / 2;
 
-            var countX = Mathf.CeilToInt(effectiveSize.x / fixCellSize.x);
-            var countY = Mathf.CeilToInt(effectiveSize.y / fixCellSize.y);
-            var countZ = Mathf.CeilToInt(effectiveSize.z / fixCellSize.z);
-
-            if (countX <= 0 && effectiveSize.x >= cellSize.x) countX = 1;
-            if (countY <= 0 && effectiveSize.y >= cellSize.y) countY = 1;
-            if (countZ <= 0 && effectiveSize.z >= cellSize.z) countZ = 1;
-
-            if (countX <= 0 || countY <= 0 || countZ <= 0) return;
-
-            var totalWidth = countX * cellSize.x + (countX - 1) * gap.x;
-            var totalHeight = countY * cellSize.y + (countY - 1) * gap.y;
-            var totalDepth = countZ * cellSize.z + (countZ - 1) * gap.z;
-
-            var startX = bounds.min.x + (effectiveSize.x - totalWidth) / 2 + cellSize.x / 2;
-            var startY = bounds.min.y + (effectiveSize.y - totalHeight) / 2 + cellSize.y / 2;
-            var startZ = bounds.min.z + (effectiveSize.z - totalDepth) / 2 + cellSize.z / 2;
+            var startPos = new Vector3(startX, startY, startZ);
 
             for (int z = 0; z < countZ; z++)
             {
@@ -61,45 +50,54 @@ namespace Game.Services.Inventory
                 {
                     for (int x = 0; x < countX; x++)
                     {
-                        var slot = new Vector3(
-                            startX + x * fixCellSize.x,
-                            startY + y * fixCellSize.y,
-                            startZ + z * fixCellSize.z
+                        var slotPosition = startPos + new Vector3(
+                            x * step.x,
+                            y * step.y,
+                            z * step.z
                         );
-                        slots.Add(slot - center);
+
+                        slots.Add(slotPosition);
                     }
                 }
             }
-
-            Slots = slots;
-        }
-
-        private float ClampValue(float value, float min, float max)
-        {
-            if (min > max) return min;
-            return Mathf.Clamp(value, min, max);
         }
 
         private void OnDrawGizmosSelected()
         {
-            var bounds = Bounds;
+            if (slots.Count == 0 && cellCount.x > 0 && cellCount.y > 0 && cellCount.z > 0)
+            {
+                GenerateSlots();
+            }
+
+            if (slots.Count == 0) return;
+
+            Matrix4x4 gizmoMatrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
+            Gizmos.matrix = gizmoMatrix;
+
+            var totalSize = new Vector3(
+                cellCount.x * cellSize.x + (cellCount.x - 1) * gap.x,
+                cellCount.y * cellSize.y + (cellCount.y - 1) * gap.y,
+                cellCount.z * cellSize.z + (cellCount.z - 1) * gap.z
+            );
+
+            var boundsCenter = new Vector3(0, totalSize.y / 2, 0);
 
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireCube(bounds.center, bounds.size);
-
-            GenerateSlots();
+            Gizmos.DrawWireCube(boundsCenter, totalSize);
 
             Gizmos.color = Color.cyan;
-            foreach (var slot in Slots)
+            foreach (var slot in slots)
             {
-                Gizmos.DrawWireCube(slot + center, cellSize);
+                Gizmos.DrawWireCube(slot, cellSize);
             }
 
             Gizmos.color = Color.blue;
-            foreach (var slot in Slots)
+            foreach (var slot in slots)
             {
-                Gizmos.DrawSphere(slot + center, 0.05f);
+                Gizmos.DrawSphere(slot, 0.05f);
             }
+
+            Gizmos.matrix = Matrix4x4.identity;
         }
     }
 }

@@ -1,11 +1,9 @@
-﻿using Game.Entities.Items;
-using Game.Services.Inventory;
-using System;
+﻿using Game.Services.Inventory;
 using UnityEngine;
 
 namespace Game.Entities.Tools
 {
-    public class ItemTray : TraderTool, IGridStorageHolder
+    public class ItemTray : Tool, IGridStorageHolder
     {
         [SerializeField] private PlacementGrid placement;
 

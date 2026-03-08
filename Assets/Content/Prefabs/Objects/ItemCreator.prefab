@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 5771718478705013532}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.13, y: 0, z: -0.6400001}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -71,7 +71,7 @@ MonoBehaviour:
   prefabs:
   - {fileID: 8202934293355630428, guid: 120af65534f29a441a24b2c2dd155f6a, type: 3}
   - {fileID: 8202934293355630428, guid: 8c558b1f6c5848640a71ffb5aa10d6e4, type: 3}
-  placement: {fileID: 1108715970043885496}
+  placement: {fileID: 0}
   interval: 0.2
 --- !u!1 &6579026464742884564
 GameObject:
@@ -240,17 +240,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48b0cbfd0a3207044b257dc6dd01da4c, type: 3}
---- !u!114 &1108715970043885496 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6739644407569033140, guid: 48b0cbfd0a3207044b257dc6dd01da4c, type: 3}
-  m_PrefabInstance: {fileID: 5974857981301166092}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62afe45838d1085468ef08ef1fb3b001, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Services.Inventory.PlacementGrid
 --- !u!4 &2040729296323610066 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5672518846054340062, guid: 48b0cbfd0a3207044b257dc6dd01da4c, type: 3}

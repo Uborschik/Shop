@@ -1,4 +1,4 @@
-﻿using Game.Entities.Tools;
+﻿using Game.Entities.Pawns;
 using Game.Services.InputSystem;
 using UnityEngine;
 
@@ -17,7 +17,7 @@ namespace Game.Entities.Items
             collision = GetComponent<Collider>();
         }
 
-        public void Interact(IInteractor interactor, InteractionMode mode)
+        public InteractionResult Interact(Pawn pawn, InteractionMode mode)
         {
             throw new System.NotImplementedException();
         }

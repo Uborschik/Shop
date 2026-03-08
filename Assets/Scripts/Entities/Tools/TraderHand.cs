@@ -1,6 +1,6 @@
 ﻿namespace Game.Entities.Tools
 {
-    public class TraderHand : TraderTool
+    public class TraderHand : Tool
     {
     }
 }

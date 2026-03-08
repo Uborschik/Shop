@@ -5,14 +5,11 @@ using UnityEngine;
 namespace Game.Entities.Pawns.Player
 {
     [RequireComponent(typeof(CharacterController))]
-    public class Trader : MonoBehaviour, IInteractor
+    public class Trader : Pawn, IInteractor
     {
-        [SerializeField] private ToolHolder toolHolder;
-
         [Header("Settings")]
         [SerializeField] private MovementConfig movementConfig;
         [SerializeField] private TraderCameraConfig cameraConfig;
-        [SerializeField] private float interactionDistance = 2f;
 
         private PlayerInputs input;
 
@@ -20,18 +17,16 @@ namespace Game.Entities.Pawns.Player
         private TraderLook look;
         private TraderInteraction interaction;
 
-        public ToolHolder ToolHolder => toolHolder;
-
         private void Awake()
         {
-            var initialTool = transform.GetComponentInChildren<TraderTool>();
+            var initialTool = transform.GetComponentInChildren<Tool>();
             var characterController = GetComponent<CharacterController>();
 
             input = new();
 
             movement = new(cameraConfig.TraderCamera.transform, characterController, movementConfig);
             look = new(transform, cameraConfig.TraderCamera.transform, cameraConfig);
-            interaction = new(this, cameraConfig.TraderCamera.transform, interactionDistance);
+            interaction = new(this, cameraConfig.TraderCamera.transform);
         }
 
         private void Start()

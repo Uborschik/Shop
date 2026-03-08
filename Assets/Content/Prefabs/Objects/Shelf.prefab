@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &562291866906316409
 Transform:
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2807675688090608558}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.37662, y: 0, z: 6.02294}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd57dcb1592f8244986291f29f923bf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Objects.Shelf
-  placement: {fileID: 0}
+  placement: {fileID: 2352643346730875855}
 --- !u!1 &5606763408416476048
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,7 +86,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6498990045120389487
 Transform:
@@ -174,7 +174,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &9006722743830755466
 Transform:
@@ -247,19 +247,42 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6456144253319721182, guid: 48b0cbfd0a3207044b257dc6dd01da4c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6739644407569033140, guid: 48b0cbfd0a3207044b257dc6dd01da4c, type: 3}
       propertyPath: gap.x
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6739644407569033140, guid: 48b0cbfd0a3207044b257dc6dd01da4c, type: 3}
       propertyPath: gap.z
-      value: 0
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6739644407569033140, guid: 48b0cbfd0a3207044b257dc6dd01da4c, type: 3}
+      propertyPath: cellCount.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6739644407569033140, guid: 48b0cbfd0a3207044b257dc6dd01da4c, type: 3}
+      propertyPath: cellCount.z
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48b0cbfd0a3207044b257dc6dd01da4c, type: 3}
+--- !u!114 &2352643346730875855 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6739644407569033140, guid: 48b0cbfd0a3207044b257dc6dd01da4c, type: 3}
+  m_PrefabInstance: {fileID: 9020219988670012539}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62afe45838d1085468ef08ef1fb3b001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Services.Inventory.PlacementGrid
 --- !u!4 &3717325255023970725 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5672518846054340062, guid: 48b0cbfd0a3207044b257dc6dd01da4c, type: 3}

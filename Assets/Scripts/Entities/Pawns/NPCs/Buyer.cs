@@ -1,52 +1,19 @@
-using Game.Entities.Items;
-using Game.Services.Inventory;
 using UnityEngine;
 
 namespace Game.Entities.Pawns.NPCs
 {
-    public class Buyer : MonoBehaviour
+    public class Buyer : Pawn
     {
         [SerializeField] private float speed;
-        [SerializeField] private int slotCount;
 
-        private Container container;
-
-        private void Awake()
+        public InteractionResult InteractWith(Transform target)
         {
-            container = new(slotCount);
-        }
-
-        public bool TryBuy(Transform target)
-        {
-            if (target.TryGetComponent<IInteractable>(out var i))
+            if (target.TryGetComponent<IInteractable>(out var interactable))
             {
-                return true;
+                return interactable.Interact(this, InteractionMode.Secondary);
             }
 
-            return false;
-        }
-
-        public bool TryPullItem(out Item item)
-        {
-            if (container == null || !container.TryGetPullIndex(out var index))
-            {
-                item = null;
-                return false;
-            }
-
-            item = container.Pull(index);
-            return true;
-        }
-
-        public bool TryPushItem(Item item)
-        {
-            if (!container.TryGetPushIndex(out var index)) return false;
-
-            item.transform.SetParent(transform);
-            item.gameObject.SetActive(false);
-
-            container.Push(index, item);
-            return true;
+            return InteractionResult.Failure;
         }
     }
 }

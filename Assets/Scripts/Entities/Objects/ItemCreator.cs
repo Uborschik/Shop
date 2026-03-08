@@ -1,4 +1,5 @@
 using Game.Entities.Items;
+using Game.Entities.Pawns;
 using Game.Entities.Tools;
 using Game.Services.InputSystem;
 using System.Collections;
@@ -20,26 +21,23 @@ namespace Game.Entities.Objects
             CreateItem();
         }
 
-        public void Interact(IInteractor interactor, InteractionMode mode)
+        public InteractionResult Interact(Pawn pawn, InteractionMode mode)
         {
-            var tool = interactor.ToolHolder.Tool;
+            var tool = pawn.ToolHolder.Tool;
 
             switch (mode)
             {
                 case InteractionMode.Primary:
-                    PrimaryAction(tool);
-                    break;
-                case InteractionMode.Secondary:
-                    break;
+                    return PrimaryAction(tool);
                 default:
-                    break;
+                    return InteractionResult.Failure;
             }
 
         }
 
-        private void PrimaryAction(TraderTool tool)
+        private InteractionResult PrimaryAction(Tool tool)
         {
-            if (createdItem == null) return;
+            if (createdItem == null) return InteractionResult.Failure;
 
             if (tool is IGridStorageHolder holder)
             {
@@ -50,6 +48,8 @@ namespace Game.Entities.Objects
                     spawnCoroutine ??= StartCoroutine(SpawnAfterDelay());
                 }
             }
+
+            return InteractionResult.Success;
         }
 
         private void CreateItem()

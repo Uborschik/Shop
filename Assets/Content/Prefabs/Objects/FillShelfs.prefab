@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9170545385059473165}
   - component: {fileID: 1427835313339135922}
   - component: {fileID: 6114889089009774483}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3b8d06f7a13084648858c0e668ea0c09, type: 2}
+  - {fileID: 2100000, guid: 5a58a84507c90e54a9214c7091e16b5d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 430587022097404549}
   - component: {fileID: 1071920956868942112}
   - component: {fileID: 2219859252385376540}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f0b45517da590d74ca32daffe2c74f1f, type: 2}
+  - {fileID: 2100000, guid: 319fb17ca689f234f84474c243b1a57c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -190,9 +190,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8187505002010488282}
   - component: {fileID: 6266053931031528572}
-  - component: {fileID: 2929762374595971405}
-  m_Layer: 0
-  m_Name: OpenStore
+  - component: {fileID: 1340685525766317314}
+  m_Layer: 8
+  m_Name: FillShelfs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -236,7 +236,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2, y: 0.05, z: 0.2}
   m_Center: {x: 0, y: 0.125, z: 0}
---- !u!114 &2929762374595971405
+--- !u!114 &1340685525766317314
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -245,10 +245,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7808875223435763192}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2202ef607381134caa37dd30ec5b53f, type: 3}
+  m_Script: {fileID: 11500000, guid: d1355cc7ad1cd60439e2cbe0f1d5ed11, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.Tools.OpenTool
-  open: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::FillShelfs
+  prefabs:
+  - {fileID: 8202934293355630428, guid: 120af65534f29a441a24b2c2dd155f6a, type: 3}
+  - {fileID: 8202934293355630428, guid: 8c558b1f6c5848640a71ffb5aa10d6e4, type: 3}
+  shelves:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   button: {fileID: 9170545385059473165}
   duration: 0.5
   up: 0.1

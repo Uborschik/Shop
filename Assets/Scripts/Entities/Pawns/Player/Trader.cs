@@ -7,6 +7,8 @@ namespace Game.Entities.Pawns.Player
     [RequireComponent(typeof(CharacterController))]
     public class Trader : Pawn, IInteractor
     {
+        [SerializeField] private int cash;
+
         [Header("Settings")]
         [SerializeField] private MovementConfig movementConfig;
         [SerializeField] private TraderCameraConfig cameraConfig;
@@ -65,6 +67,8 @@ namespace Game.Entities.Pawns.Player
         {
             look.AddLook(input.MouseDelta);
         }
+
+        public void AddCash(int amount) => cash += amount;
 
         private void OnJump() => movement?.Jump();
         private void OnInteract(InteractionMode mode) => interaction?.OnInteract(mode);

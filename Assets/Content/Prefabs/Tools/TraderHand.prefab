@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c594dfa363274e149ab55f70cbdf4403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.Tools.TraderHand
-  rayDistance: 2
-  interactionMask:
+  <RayDistance>k__BackingField: 3
+  <InteractionMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 512

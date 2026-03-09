@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Entities.Objects
 {
-    public abstract class InteractableObject : MonoBehaviour, IInteractable
+    public abstract class InteractableObject : Entity, IInteractable
     {
         public abstract InteractionResult Interact(Pawn pawn, InteractionMode mode);
     }

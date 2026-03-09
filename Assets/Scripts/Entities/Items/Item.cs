@@ -1,13 +1,14 @@
 ﻿using Game.Entities.Pawns;
-using Game.Services.InputSystem;
 using UnityEngine;
 
 namespace Game.Entities.Items
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(Collider))]
-    public abstract class Item : MonoBehaviour, IInteractable
+    public class Item : Entity, IInteractable
     {
+        [field: SerializeField] public ItemData Data { get; private set; }
+
         private Rigidbody rb;
         private Collider collision;
 

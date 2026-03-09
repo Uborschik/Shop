@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 319fb17ca689f234f84474c243b1a57c, type: 2}
+  - {fileID: 2100000, guid: 3b8d06f7a13084648858c0e668ea0c09, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,9 +101,9 @@ GameObject:
   - component: {fileID: 1781589285103319197}
   - component: {fileID: 1674588798390417147}
   - component: {fileID: 524225978744396119}
-  - component: {fileID: 8202934293355630428}
+  - component: {fileID: 6478785543301342423}
   m_Layer: 7
-  m_Name: GreenApple_0
+  m_Name: Tomato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -173,7 +173,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8202934293355630428
+--- !u!114 &6478785543301342423
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,6 +182,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1500814624627622176}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3393e67e4ae07f418af4a78be849bfe, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e72c15cbca992747bf6cc3d723dd4f3, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.Items.Apple
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.Items.Item
+  <Data>k__BackingField:
+    Name: Tomato
+    SupplierPrice: 7
+    PurchasePrice: 9

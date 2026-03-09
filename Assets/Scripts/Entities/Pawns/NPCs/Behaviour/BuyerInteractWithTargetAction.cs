@@ -15,18 +15,9 @@ public partial class BuyerInteractWithTargetAction : Action
     [SerializeReference] public BlackboardVariable<InteractableObject> Target;
     protected override Status OnStart()
     {
-        return Status.Running;
-    }
-
-    protected override Status OnUpdate()
-    {
         var result = Buyer.Value.InteractWith(Target.Value.transform);
 
         return result == InteractionResult.Success ? Status.Running : Status.Success;
-    }
-
-    protected override void OnEnd()
-    {
     }
 }
 

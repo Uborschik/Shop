@@ -23,6 +23,8 @@ public class FillShelfs : MonoBehaviour, IInteractable
         button.DOLocalMoveY(!isPressed ? dawn : up, duration);
         isPressed = !isPressed;
 
+        var successPush = 0;
+
         for (int i = 0; i < shelves.Length; i++)
         {
             var storage = shelves[i].Storage;
@@ -31,8 +33,13 @@ public class FillShelfs : MonoBehaviour, IInteractable
             {
                 var item = CreateItem();
 
-                storage.TryAddItem(item);
+                if (!storage.TryAddItem(item)) return InteractionResult.Failure;
+
+                successPush++;
             }
+
+            Debug.Log(successPush);
+            successPush = 0;
         }
 
         return InteractionResult.Success;

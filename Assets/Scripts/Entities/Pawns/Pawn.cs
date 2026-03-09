@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Entities.Pawns
 {
-    public abstract class Pawn : MonoBehaviour
+    public abstract class Pawn : Entity
     {
         [field: SerializeField] public ToolHolder ToolHolder { get; protected set; }
     }

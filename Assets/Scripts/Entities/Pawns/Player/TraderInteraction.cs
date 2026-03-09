@@ -18,7 +18,15 @@ namespace Game.Entities.Pawns.Player
 
         public void OnInteract(InteractionMode mode)
         {
-            pawn.ToolHolder.Tool.Use(cameraTransform, pawn, mode);
+            var tool = pawn.ToolHolder.Tool;
+
+            if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, tool.RayDistance, tool.InteractionMask))
+            {
+                if (hit.collider.TryGetComponent<IInteractable>(out var interactable))
+                {
+                    tool.Use(interactable, pawn, mode);
+                }
+            }
         }
     }
 }

@@ -1,7 +1,6 @@
 using Game.Entities.Items;
 using Game.Entities.Pawns;
 using Game.Entities.Tools;
-using Game.Services.InputSystem;
 using System.Collections;
 using UnityEngine;
 

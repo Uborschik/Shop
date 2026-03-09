@@ -1,9 +1,6 @@
-﻿using Game.Entities.Items;
-using Game.Entities.Pawns;
+﻿using Game.Entities.Pawns;
 using Game.Entities.Pawns.NPCs;
 using Game.Entities.Pawns.Player;
-using Game.Services.InputSystem;
-using UnityEngine;
 
 namespace Game.Entities.Objects
 {
@@ -11,26 +8,40 @@ namespace Game.Entities.Objects
     {
         private Buyer buyer;
 
-        public void SetBuyer(Buyer buyer)
-        {
-            this.buyer = buyer;
-        }
-
         public override InteractionResult Interact(Pawn pawn, InteractionMode mode)
         {
             if (pawn == null) return InteractionResult.Failure;
-            if (pawn is Buyer buyer)
+            if (buyer == null)
             {
-                this.buyer = buyer; 
-                Debug.Log("[Cashbox] Buyer is here!");
+                if (pawn is Buyer potentialBuyer) buyer = potentialBuyer;
+
+                return InteractionResult.Running;
             }
-            if (pawn is Trader trader)
+            else if (pawn is Trader trader)
             {
-                Debug.Log("[Cashbox] Trader is here!");
+                TryPay(trader);
+
+                return InteractionResult.Success;
             }
 
+            return InteractionResult.Failure;
+        }
 
-            return InteractionResult.Success;
+        private void TryPay(Trader trader)
+        {
+            if (buyer.Tool is IGridStorageHolder storageHolder)
+            {
+                var items = storageHolder.Storage.GetAll();
+
+                for (int i = 0; i < items.Length; i++)
+                {
+                    if (!storageHolder.Storage.TryRemoveItem(out var item)) continue;
+
+                    Destroy(item.gameObject);
+
+                    trader.AddCash(20);
+                }
+            }
         }
     }
 }

@@ -64,7 +64,7 @@ namespace Game.Services.Inventory
 
         private void OnDrawGizmosSelected()
         {
-            if (slots.Count == 0 && cellCount.x > 0 && cellCount.y > 0 && cellCount.z > 0)
+            if (cellCount.x > 0 && cellCount.y > 0 && cellCount.z > 0)
             {
                 GenerateSlots();
             }

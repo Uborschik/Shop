@@ -1,3 +1,4 @@
+using Game.Entities.Tools;
 using UnityEngine;
 
 namespace Game.Entities.Pawns.NPCs
@@ -5,6 +6,11 @@ namespace Game.Entities.Pawns.NPCs
     public class Buyer : Pawn
     {
         [SerializeField] private float speed;
+        [SerializeField] private Tool tool;
+        [SerializeField] private string shoppingList;
+
+        public Tool Tool => tool;
+        public string ShoppingList => shoppingList;
 
         public InteractionResult InteractWith(Transform target)
         {

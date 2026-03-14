@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
   m_Name: BuyerBehavior Blackboard
   m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.RuntimeBlackboardAsset
-  VersionTimestamp: 639085979986006843
+  VersionTimestamp: 639088270602949640
   AssetID:
     m_Value0: 13027540232756200129
     m_Value1: 627530307405026778
@@ -20,10 +20,10 @@ MonoBehaviour:
     m_Variables:
     - rid: 1682070417910268729
     - rid: 1682070413723303983
-    - rid: 1682070465756528866
+    - rid: 1682070491257897076
     - rid: 1682070465756529190
-    - rid: 1682070463517557495
-    - rid: 1682070463517557635
+    - rid: 1682070491257897161
+    - rid: 1682070491257897199
     - rid: 1682070413723304047
     - rid: 1682070417910267953
   m_SharedBlackboardVariableGuids: []
@@ -62,30 +62,6 @@ MonoBehaviour:
           m_Value1: 16397161150804839585
         Name: Discovery
         m_Value: {fileID: 0}
-    - rid: 1682070463517557495
-      type: {class: 'BlackboardVariable`1[[Game.Entities.Objects.Shelf, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 13220953440790422975
-          m_Value1: 8094389726889617340
-        Name: Shelf
-        m_Value: {fileID: 0}
-    - rid: 1682070463517557635
-      type: {class: 'BlackboardVariable`1[[Game.Entities.Objects.Cashbox, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 10538763708179063920
-          m_Value1: 5106893995611445405
-        Name: Cashbox
-        m_Value: {fileID: 0}
-    - rid: 1682070465756528866
-      type: {class: 'BlackboardVariable`1[[Game.Entities.Pawns.NPCs.Buyer, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 17121319179482192936
-          m_Value1: 9534293916045558522
-        Name: Buyer
-        m_Value: {fileID: 0}
     - rid: 1682070465756529190
       type: {class: 'BlackboardVariable`1[[Game.Entities.Objects.InteractableObject, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -93,6 +69,30 @@ MonoBehaviour:
           m_Value0: 15112835185701661628
           m_Value1: 247920862304551682
         Name: Target
+        m_Value: {fileID: 0}
+    - rid: 1682070491257897076
+      type: {class: 'BlackboardVariable`1[[Game.Entities.Pawns.NPCs.Buyer, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 8235291094288188751
+          m_Value1: 16145386942772173331
+        Name: Buyer
+        m_Value: {fileID: 0}
+    - rid: 1682070491257897161
+      type: {class: 'BlackboardVariable`1[[Game.Entities.Objects.Shelf, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 15491503719841110508
+          m_Value1: 9964647188748214148
+        Name: Shelf
+        m_Value: {fileID: 0}
+    - rid: 1682070491257897199
+      type: {class: 'BlackboardVariable`1[[Game.Entities.Objects.Cashbox, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 16569397444005991380
+          m_Value1: 14707094938926947561
+        Name: Cashbox
         m_Value: {fileID: 0}
 --- !u!114 &-98215223698081590
 MonoBehaviour:
@@ -126,8 +126,8 @@ MonoBehaviour:
           rid: 1682070413723303985
         BlackboardGroupReferences: []
         Root:
-          rid: 1682070467345384135
-        m_VersionTimestamp: 639085983236873334
+          rid: 1682070528606601269
+        m_VersionTimestamp: 639088270615614663
     - rid: 1682070413723303985
       type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -138,143 +138,15 @@ MonoBehaviour:
       type: {class: Blackboard, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         m_Variables:
-        - rid: 1682070467345384086
-        - rid: 1682070467345384087
-        - rid: 1682070467345384088
-        - rid: 1682070467345384089
-        - rid: 1682070467345384090
-        - rid: 1682070467345384091
-        - rid: 1682070467345384092
-        - rid: 1682070467345384093
-    - rid: 1682070467345384086
-      type: {class: 'BlackboardVariable`1[[Discovery, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 17171686495435772730
-          m_Value1: 16397161150804839585
-        Name: Discovery
-        m_Value: {fileID: 0}
-    - rid: 1682070467345384087
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 1
-          m_Value1: 0
-        Name: Self
-        m_Value: {fileID: 0}
-    - rid: 1682070467345384088
-      type: {class: 'BlackboardVariable`1[[Game.Entities.Pawns.NPCs.Buyer, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 17121319179482192936
-          m_Value1: 9534293916045558522
-        Name: Buyer
-        m_Value: {fileID: 0}
-    - rid: 1682070467345384089
-      type: {class: 'BlackboardVariable`1[[Game.Entities.Objects.InteractableObject, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 15112835185701661628
-          m_Value1: 247920862304551682
-        Name: Target
-        m_Value: {fileID: 0}
-    - rid: 1682070467345384090
-      type: {class: 'BlackboardVariable`1[[Game.Entities.Objects.Shelf, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 13220953440790422975
-          m_Value1: 8094389726889617340
-        Name: Shelf
-        m_Value: {fileID: 0}
-    - rid: 1682070467345384091
-      type: {class: 'BlackboardVariable`1[[Game.Entities.Objects.Cashbox, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 10538763708179063920
-          m_Value1: 5106893995611445405
-        Name: Cashbox
-        m_Value: {fileID: 0}
-    - rid: 1682070467345384092
-      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 6020908970356350840
-          m_Value1: 18358248014405996353
-        Name: Speed
-        m_Value: 3
-    - rid: 1682070467345384093
-      type: {class: 'BlackboardVariable`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 12264445957297303757
-          m_Value1: 16951282093743711349
-        Name: IsInRange
-        m_Value: 0
-    - rid: 1682070467345384124
-      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 0
-          m_Value1: 0
-        Name: 
-        m_Value: 0.2
-    - rid: 1682070467345384125
-      type: {class: 'BlackboardVariable`1[[System.String, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 0
-          m_Value1: 0
-        Name: 
-        m_Value: SpeedMagnitude
-    - rid: 1682070467345384126
-      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 0
-          m_Value1: 0
-        Name: 
-        m_Value: 1
-    - rid: 1682070467345384127
-      type: {class: 'BlackboardVariable`1[[Unity.Behavior.NavigateToTargetAction/TargetPositionMode, Unity.Behavior]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 0
-          m_Value1: 0
-        Name: 
-        m_Value: 0
-    - rid: 1682070467345384131
-      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 0
-          m_Value1: 0
-        Name: 
-        m_Value: 0.2
-    - rid: 1682070467345384132
-      type: {class: 'BlackboardVariable`1[[System.String, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 0
-          m_Value1: 0
-        Name: 
-        m_Value: SpeedMagnitude
-    - rid: 1682070467345384133
-      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 0
-          m_Value1: 0
-        Name: 
-        m_Value: 1
-    - rid: 1682070467345384134
-      type: {class: 'BlackboardVariable`1[[Unity.Behavior.NavigateToTargetAction/TargetPositionMode, Unity.Behavior]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 0
-          m_Value1: 0
-        Name: 
-        m_Value: 0
-    - rid: 1682070467345384135
+        - rid: 1682070528606601271
+        - rid: 1682070528606601272
+        - rid: 1682070528606601273
+        - rid: 1682070528606601274
+        - rid: 1682070528606601275
+        - rid: 1682070528606601276
+        - rid: 1682070528606601277
+        - rid: 1682070528606601278
+    - rid: 1682070528606601269
       type: {class: StartOnEvent, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
@@ -285,16 +157,16 @@ MonoBehaviour:
         m_Parent:
           rid: -2
         m_Child:
-          rid: 1682070467345384136
+          rid: 1682070528606601270
         ChannelVariable:
-          rid: 1682070467345384086
+          rid: 1682070528606601271
         MessageVariables:
         - rid: -2
         - rid: -2
         - rid: -2
         - rid: -2
         Mode: 0
-    - rid: 1682070467345384136
+    - rid: 1682070528606601270
       type: {class: SequenceComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
@@ -303,16 +175,80 @@ MonoBehaviour:
         Graph:
           rid: 1682070413723303984
         m_Parent:
-          rid: 1682070467345384135
+          rid: 1682070528606601269
         m_Children:
-        - rid: 1682070467345384137
-        - rid: 1682070467345384138
-        - rid: 1682070467345384139
-        - rid: 1682070467345384140
-        - rid: 1682070467345384141
-        - rid: 1682070467345384142
+        - rid: 1682070528606601279
+        - rid: 1682070528606601280
+        - rid: 1682070528606601281
+        - rid: 1682070528606601282
+        - rid: 1682070528606601283
+        - rid: 1682070528606601284
         m_RegisteredObservers: []
-    - rid: 1682070467345384137
+    - rid: 1682070528606601271
+      type: {class: 'BlackboardVariable`1[[Discovery, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 17171686495435772730
+          m_Value1: 16397161150804839585
+        Name: Discovery
+        m_Value: {fileID: 0}
+    - rid: 1682070528606601272
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 0}
+    - rid: 1682070528606601273
+      type: {class: 'BlackboardVariable`1[[Game.Entities.Pawns.NPCs.Buyer, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 8235291094288188751
+          m_Value1: 16145386942772173331
+        Name: Buyer
+        m_Value: {fileID: 0}
+    - rid: 1682070528606601274
+      type: {class: 'BlackboardVariable`1[[Game.Entities.Objects.InteractableObject, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 15112835185701661628
+          m_Value1: 247920862304551682
+        Name: Target
+        m_Value: {fileID: 0}
+    - rid: 1682070528606601275
+      type: {class: 'BlackboardVariable`1[[Game.Entities.Objects.Shelf, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 15491503719841110508
+          m_Value1: 9964647188748214148
+        Name: Shelf
+        m_Value: {fileID: 0}
+    - rid: 1682070528606601276
+      type: {class: 'BlackboardVariable`1[[Game.Entities.Objects.Cashbox, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 16569397444005991380
+          m_Value1: 14707094938926947561
+        Name: Cashbox
+        m_Value: {fileID: 0}
+    - rid: 1682070528606601277
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 6020908970356350840
+          m_Value1: 18358248014405996353
+        Name: Speed
+        m_Value: 3
+    - rid: 1682070528606601278
+      type: {class: 'BlackboardVariable`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 12264445957297303757
+          m_Value1: 16951282093743711349
+        Name: IsInRange
+        m_Value: 0
+    - rid: 1682070528606601279
       type: {class: SetVariableValueAction, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
@@ -321,12 +257,12 @@ MonoBehaviour:
         Graph:
           rid: 1682070413723303984
         m_Parent:
-          rid: 1682070467345384136
+          rid: 1682070528606601270
         Variable:
-          rid: 1682070467345384089
+          rid: 1682070528606601274
         Value:
-          rid: 1682070467345384143
-    - rid: 1682070467345384138
+          rid: 1682070528606601285
+    - rid: 1682070528606601280
       type: {class: NavigateToTargetAction, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
@@ -335,22 +271,22 @@ MonoBehaviour:
         Graph:
           rid: 1682070413723303984
         m_Parent:
-          rid: 1682070467345384136
+          rid: 1682070528606601270
         Agent:
-          rid: 1682070467345384144
+          rid: 1682070528606601286
         Target:
-          rid: 1682070467345384145
+          rid: 1682070528606601287
         Speed:
-          rid: 1682070467345384092
+          rid: 1682070528606601277
         DistanceThreshold:
-          rid: 1682070467345384124
+          rid: 1682070528606601288
         AnimatorSpeedParam:
-          rid: 1682070467345384125
+          rid: 1682070528606601289
         SlowDownDistance:
-          rid: 1682070467345384126
+          rid: 1682070528606601290
         m_TargetPositionMode:
-          rid: 1682070467345384127
-    - rid: 1682070467345384139
+          rid: 1682070528606601291
+    - rid: 1682070528606601281
       type: {class: BuyerInteractWithTargetAction, ns: , asm: Assembly-CSharp}
       data:
         ID:
@@ -359,12 +295,12 @@ MonoBehaviour:
         Graph:
           rid: 1682070413723303984
         m_Parent:
-          rid: 1682070467345384136
+          rid: 1682070528606601270
         Buyer:
-          rid: 1682070467345384088
+          rid: 1682070528606601273
         Target:
-          rid: 1682070467345384089
-    - rid: 1682070467345384140
+          rid: 1682070528606601274
+    - rid: 1682070528606601282
       type: {class: SetVariableValueAction, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
@@ -373,12 +309,12 @@ MonoBehaviour:
         Graph:
           rid: 1682070413723303984
         m_Parent:
-          rid: 1682070467345384136
+          rid: 1682070528606601270
         Variable:
-          rid: 1682070467345384089
+          rid: 1682070528606601274
         Value:
-          rid: 1682070467345384146
-    - rid: 1682070467345384141
+          rid: 1682070528606601292
+    - rid: 1682070528606601283
       type: {class: NavigateToTargetAction, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
@@ -387,22 +323,22 @@ MonoBehaviour:
         Graph:
           rid: 1682070413723303984
         m_Parent:
-          rid: 1682070467345384136
+          rid: 1682070528606601270
         Agent:
-          rid: 1682070467345384147
+          rid: 1682070528606601293
         Target:
-          rid: 1682070467345384148
+          rid: 1682070528606601294
         Speed:
-          rid: 1682070467345384092
+          rid: 1682070528606601277
         DistanceThreshold:
-          rid: 1682070467345384131
+          rid: 1682070528606601295
         AnimatorSpeedParam:
-          rid: 1682070467345384132
+          rid: 1682070528606601296
         SlowDownDistance:
-          rid: 1682070467345384133
+          rid: 1682070528606601297
         m_TargetPositionMode:
-          rid: 1682070467345384134
-    - rid: 1682070467345384142
+          rid: 1682070528606601298
+    - rid: 1682070528606601284
       type: {class: BuyerInteractWithTargetAction, ns: , asm: Assembly-CSharp}
       data:
         ID:
@@ -411,12 +347,12 @@ MonoBehaviour:
         Graph:
           rid: 1682070413723303984
         m_Parent:
-          rid: 1682070467345384136
+          rid: 1682070528606601270
         Buyer:
-          rid: 1682070467345384088
+          rid: 1682070528606601273
         Target:
-          rid: 1682070467345384089
-    - rid: 1682070467345384143
+          rid: 1682070528606601274
+    - rid: 1682070528606601285
       type: {class: 'ComponentToComponentBlackboardVariable`2[[Game.Entities.Objects.Shelf, Assembly-CSharp],[Game.Entities.Objects.InteractableObject, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -425,8 +361,8 @@ MonoBehaviour:
         Name: 
         m_Value: {fileID: 0}
         m_LinkedVariable:
-          rid: 1682070467345384090
-    - rid: 1682070467345384144
+          rid: 1682070528606601275
+    - rid: 1682070528606601286
       type: {class: 'ComponentToGameObjectBlackboardVariable`1[[Game.Entities.Pawns.NPCs.Buyer, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -435,8 +371,8 @@ MonoBehaviour:
         Name: 
         m_Value: {fileID: 0}
         m_LinkedVariable:
-          rid: 1682070467345384088
-    - rid: 1682070467345384145
+          rid: 1682070528606601273
+    - rid: 1682070528606601287
       type: {class: 'ComponentToGameObjectBlackboardVariable`1[[Game.Entities.Objects.InteractableObject, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -445,8 +381,40 @@ MonoBehaviour:
         Name: 
         m_Value: {fileID: 0}
         m_LinkedVariable:
-          rid: 1682070467345384089
-    - rid: 1682070467345384146
+          rid: 1682070528606601274
+    - rid: 1682070528606601288
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: 0.2
+    - rid: 1682070528606601289
+      type: {class: 'BlackboardVariable`1[[System.String, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: SpeedMagnitude
+    - rid: 1682070528606601290
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: 1
+    - rid: 1682070528606601291
+      type: {class: 'BlackboardVariable`1[[Unity.Behavior.NavigateToTargetAction/TargetPositionMode, Unity.Behavior]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: 0
+    - rid: 1682070528606601292
       type: {class: 'ComponentToComponentBlackboardVariable`2[[Game.Entities.Objects.Cashbox, Assembly-CSharp],[Game.Entities.Objects.InteractableObject, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -455,8 +423,8 @@ MonoBehaviour:
         Name: 
         m_Value: {fileID: 0}
         m_LinkedVariable:
-          rid: 1682070467345384091
-    - rid: 1682070467345384147
+          rid: 1682070528606601276
+    - rid: 1682070528606601293
       type: {class: 'ComponentToGameObjectBlackboardVariable`1[[Game.Entities.Pawns.NPCs.Buyer, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -465,8 +433,8 @@ MonoBehaviour:
         Name: 
         m_Value: {fileID: 0}
         m_LinkedVariable:
-          rid: 1682070467345384088
-    - rid: 1682070467345384148
+          rid: 1682070528606601273
+    - rid: 1682070528606601294
       type: {class: 'ComponentToGameObjectBlackboardVariable`1[[Game.Entities.Objects.InteractableObject, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -475,7 +443,39 @@ MonoBehaviour:
         Name: 
         m_Value: {fileID: 0}
         m_LinkedVariable:
-          rid: 1682070467345384089
+          rid: 1682070528606601274
+    - rid: 1682070528606601295
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: 0.2
+    - rid: 1682070528606601296
+      type: {class: 'BlackboardVariable`1[[System.String, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: SpeedMagnitude
+    - rid: 1682070528606601297
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: 1
+    - rid: 1682070528606601298
+      type: {class: 'BlackboardVariable`1[[Unity.Behavior.NavigateToTargetAction/TargetPositionMode, Unity.Behavior]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,7 +499,7 @@ MonoBehaviour:
   - rid: 1682070467345383859
   - rid: 1682070467345383983
   - rid: 1682070467345384105
-  m_VersionTimestamp: 639085983236873334
+  m_VersionTimestamp: 639088270615614663
   m_SerializedVersion: 2
   m_DebugInfo: {fileID: 4571456498236135661}
   m_RuntimeGraph: {fileID: -98215223698081590}
@@ -678,7 +678,7 @@ MonoBehaviour:
         LocalValue:
           rid: 1682070413723304004
         LinkedVariable:
-          rid: 1682070467345383869
+          rid: 1682070528606601268
     - rid: 1682070413723303998
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -909,7 +909,7 @@ MonoBehaviour:
         LocalValue:
           rid: 1682070465756529301
         LinkedVariable:
-          rid: 1682070467345383572
+          rid: 1682070491257897259
     - rid: 1682070465756529300
       type: {class: 'BlackboardVariable`1[[Game.Entities.Objects.InteractableObject, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -996,7 +996,7 @@ MonoBehaviour:
         LocalValue:
           rid: 1682070467345383574
         LinkedVariable:
-          rid: 1682070467345383589
+          rid: 1682070491257897238
     - rid: 1682070467345383571
       type: {class: 'TypedVariableModel`1[[Game.Entities.Objects.InteractableObject, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
@@ -1004,16 +1004,6 @@ MonoBehaviour:
           m_Value0: 15112835185701661628
           m_Value1: 247920862304551682
         Name: Target
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 0}
-    - rid: 1682070467345383572
-      type: {class: 'TypedVariableModel`1[[Game.Entities.Objects.Cashbox, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 10538763708179063920
-          m_Value1: 5106893995611445405
-        Name: Cashbox
         IsExposed: 1
         m_IsShared: 0
         m_Value: {fileID: 0}
@@ -1070,16 +1060,6 @@ MonoBehaviour:
         m_NodeModel:
           rid: 1682070467345383579
         m_Connections: []
-    - rid: 1682070467345383589
-      type: {class: 'TypedVariableModel`1[[Game.Entities.Objects.Shelf, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 13220953440790422975
-          m_Value1: 8094389726889617340
-        Name: Shelf
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 0}
     - rid: 1682070467345383859
       type: {class: ActionNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -1134,7 +1114,7 @@ MonoBehaviour:
         LocalValue:
           rid: 1682070467345383872
         LinkedVariable:
-          rid: 1682070467345383869
+          rid: 1682070491257897109
     - rid: 1682070467345383863
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -1201,16 +1181,6 @@ MonoBehaviour:
           rid: 1682070467345383878
         LinkedVariable:
           rid: -2
-    - rid: 1682070467345383869
-      type: {class: 'TypedVariableModel`1[[Game.Entities.Pawns.NPCs.Buyer, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 17121319179482192936
-          m_Value1: 9534293916045558522
-        Name: Buyer
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 0}
     - rid: 1682070467345383870
       type: {class: 'TypedVariableModel`1[[Game.Entities.Objects.InteractableObject, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
@@ -1336,7 +1306,7 @@ MonoBehaviour:
         LocalValue:
           rid: 1682070467345383988
         LinkedVariable:
-          rid: 1682070467345384110
+          rid: 1682070491257897109
     - rid: 1682070467345383987
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -1413,7 +1383,7 @@ MonoBehaviour:
         LocalValue:
           rid: 1682070467345384112
         LinkedVariable:
-          rid: 1682070467345384110
+          rid: 1682070491257897109
     - rid: 1682070467345384109
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -1425,16 +1395,6 @@ MonoBehaviour:
           rid: 1682070467345384113
         LinkedVariable:
           rid: 1682070467345384111
-    - rid: 1682070467345384110
-      type: {class: 'TypedVariableModel`1[[Game.Entities.Pawns.NPCs.Buyer, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 17121319179482192936
-          m_Value1: 9534293916045558522
-        Name: Buyer
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 0}
     - rid: 1682070467345384111
       type: {class: 'TypedVariableModel`1[[Game.Entities.Objects.InteractableObject, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
@@ -1461,6 +1421,46 @@ MonoBehaviour:
           m_Value1: 0
         Name: 
         m_Value: {fileID: 0}
+    - rid: 1682070491257897109
+      type: {class: 'TypedVariableModel`1[[Game.Entities.Pawns.NPCs.Buyer, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 8235291094288188751
+          m_Value1: 16145386942772173331
+        Name: Buyer
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 1682070491257897238
+      type: {class: 'TypedVariableModel`1[[Game.Entities.Objects.Shelf, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 15491503719841110508
+          m_Value1: 9964647188748214148
+        Name: Shelf
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 1682070491257897259
+      type: {class: 'TypedVariableModel`1[[Game.Entities.Objects.Cashbox, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 16569397444005991380
+          m_Value1: 14707094938926947561
+        Name: Cashbox
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 1682070528606601268
+      type: {class: 'TypedVariableModel`1[[Game.Entities.Pawns.NPCs.Buyer, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 8235291094288188751
+          m_Value1: 16145386942772173331
+        Name: Buyer
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
 --- !u!114 &3411742433236830306
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1479,13 +1479,13 @@ MonoBehaviour:
   m_Variables:
   - rid: 1682070417910268728
   - rid: 1682070413723303991
-  - rid: 1682070465756528865
+  - rid: 1682070491257897075
   - rid: 1682070465756529189
-  - rid: 1682070463517557494
-  - rid: 1682070463517557634
+  - rid: 1682070491257897160
+  - rid: 1682070491257897198
   - rid: 1682070413723304046
   - rid: 1682070417910267952
-  m_VersionTimestamp: 639085979986006843
+  m_VersionTimestamp: 639088270602949640
   m_CommandBuffer:
     m_Commands: []
   m_RuntimeBlackboardAsset: {fileID: -4004798523377455942}
@@ -1532,36 +1532,6 @@ MonoBehaviour:
         IsExposed: 1
         m_IsShared: 0
         m_Value: {fileID: 0}
-    - rid: 1682070463517557494
-      type: {class: 'TypedVariableModel`1[[Game.Entities.Objects.Shelf, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 13220953440790422975
-          m_Value1: 8094389726889617340
-        Name: Shelf
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 0}
-    - rid: 1682070463517557634
-      type: {class: 'TypedVariableModel`1[[Game.Entities.Objects.Cashbox, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 10538763708179063920
-          m_Value1: 5106893995611445405
-        Name: Cashbox
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 0}
-    - rid: 1682070465756528865
-      type: {class: 'TypedVariableModel`1[[Game.Entities.Pawns.NPCs.Buyer, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 17121319179482192936
-          m_Value1: 9534293916045558522
-        Name: Buyer
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 0}
     - rid: 1682070465756529189
       type: {class: 'TypedVariableModel`1[[Game.Entities.Objects.InteractableObject, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
@@ -1569,6 +1539,36 @@ MonoBehaviour:
           m_Value0: 15112835185701661628
           m_Value1: 247920862304551682
         Name: Target
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 1682070491257897075
+      type: {class: 'TypedVariableModel`1[[Game.Entities.Pawns.NPCs.Buyer, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 8235291094288188751
+          m_Value1: 16145386942772173331
+        Name: Buyer
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 1682070491257897160
+      type: {class: 'TypedVariableModel`1[[Game.Entities.Objects.Shelf, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 15491503719841110508
+          m_Value1: 9964647188748214148
+        Name: Shelf
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 1682070491257897198
+      type: {class: 'TypedVariableModel`1[[Game.Entities.Objects.Cashbox, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 16569397444005991380
+          m_Value1: 14707094938926947561
+        Name: Cashbox
         IsExposed: 1
         m_IsShared: 0
         m_Value: {fileID: 0}

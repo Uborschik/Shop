@@ -1,10 +1,11 @@
 ﻿using Game.Entities.Pawns.Player;
 using UnityEngine;
+using VContainer;
 
 namespace Game.Entities.Pawns
 {
-    public abstract class Pawn : Entity
+    public abstract class Pawn : MonoBehaviour
     {
-        [field: SerializeField] public ToolHolder ToolHolder { get; protected set; }
+        [Inject] public Hand Hand { get; protected set; }
     }
 }

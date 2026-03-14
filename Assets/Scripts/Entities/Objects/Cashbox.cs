@@ -29,17 +29,12 @@ namespace Game.Entities.Objects
 
         private void TryPay(Trader trader)
         {
-            if (buyer.Tool is IGridStorageHolder storageHolder)
+            if (buyer.Item is IGridStorageHolder holder)
             {
-                var items = storageHolder.Storage.GetAll();
+                var items = holder.Storage.GetAll();
 
                 for (int i = 0; i < items.Length; i++)
                 {
-                    if (!storageHolder.Storage.TryRemoveItem(out var item)) continue;
-
-                    Destroy(item.gameObject);
-
-                    trader.AddCash(20);
                 }
             }
         }

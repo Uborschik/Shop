@@ -1,6 +1,5 @@
 using Game.Entities.Items;
 using Game.Entities.Pawns;
-using Game.Entities.Tools;
 using System.Collections;
 using UnityEngine;
 
@@ -22,23 +21,24 @@ namespace Game.Entities.Objects
 
         public InteractionResult Interact(Pawn pawn, InteractionMode mode)
         {
-            var tool = pawn.ToolHolder.Tool;
+            //var item = pawn.ToolHolder.Item;
 
-            switch (mode)
-            {
-                case InteractionMode.Primary:
-                    return PrimaryAction(tool);
-                default:
-                    return InteractionResult.Failure;
-            }
+            //switch (mode)
+            //{
+            //    case InteractionMode.Primary:
+            //        return PrimaryAction(item);
+            //    default:
+            //        return InteractionResult.Failure;
+            //}
 
+            return InteractionResult.Success;
         }
 
-        private InteractionResult PrimaryAction(Tool tool)
+        private InteractionResult PrimaryAction(Item item)
         {
             if (createdItem == null) return InteractionResult.Failure;
 
-            if (tool is IGridStorageHolder holder)
+            if (item is IGridStorageHolder holder)
             {
                 if (holder.Storage.TryAddItem(createdItem))
                 {
@@ -60,9 +60,8 @@ namespace Game.Entities.Objects
             }
 
             var randomIndex = Random.Range(0, prefabs.Length);
-            createdItem = Instantiate(prefabs[randomIndex], transform);
-            createdItem.transform.position = placement.position;
-            createdItem.SetActivePhysics(false);
+            createdItem = Instantiate(prefabs[randomIndex]);
+            createdItem.OnPickup(placement);
         }
 
         private IEnumerator SpawnAfterDelay()

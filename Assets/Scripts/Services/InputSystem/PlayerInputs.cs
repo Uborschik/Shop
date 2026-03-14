@@ -5,39 +5,27 @@ using UnityEngine.InputSystem;
 
 namespace Game.Services.InputSystem
 {
-    public class PlayerInputs : InputHandler
+    public class PlayerInputs : InputHandler, InputControls.IPlayerActions
     {
         public Vector2 MovementDirection { get; private set; }
         public Vector2 MouseDelta { get; private set; }
 
         public event Action Jump;
+        public event Action Drop;
         public event Action<InteractionMode> Interact;
         public event Action<InteractionMode> AltInteract;
 
         public PlayerInputs()
         {
-            Inputs.Player.Movement.performed += OnMovement;
-            Inputs.Player.Movement.canceled += OnMovement;
-            Inputs.Player.Look.started += OnLook;
-            Inputs.Player.Look.canceled += OnLook;
-            Inputs.Player.Jump.performed += OnJump;
-            Inputs.Player.Interact.performed += OnInteract;
-            Inputs.Player.AltInteract.performed += OnAltInteract;
+            Inputs.Player.AddCallbacks(this);
         }
 
         public override void Dispose()
         {
-            Inputs.Player.Movement.started -= OnMovement;
-            Inputs.Player.Movement.canceled -= OnMovement;
-            Inputs.Player.Look.started -= OnLook;
-            Inputs.Player.Look.canceled -= OnLook;
-            Inputs.Player.Jump.performed -= OnJump;
-            Inputs.Player.Interact.performed -= OnInteract;
-            Inputs.Player.AltInteract.performed -= OnAltInteract;
+            Inputs.Player.RemoveCallbacks(this);
 
             base.Dispose();
         }
-
 
         public void OnMovement(InputAction.CallbackContext context)
         {
@@ -53,6 +41,12 @@ namespace Game.Services.InputSystem
         {
             if (context.phase == InputActionPhase.Performed)
                 Jump?.Invoke();
+        }
+
+        public void OnDrop(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+                Drop?.Invoke();
         }
 
         public void OnInteract(InputAction.CallbackContext context)

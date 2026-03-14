@@ -6,8 +6,6 @@ public static class Extensions
     {
         if (rigidbody.isKinematic == !enable) return;
 
-        rigidbody.linearVelocity = default;
-        rigidbody.angularVelocity = default;
         rigidbody.useGravity = enable;
         rigidbody.isKinematic = !enable;
     }

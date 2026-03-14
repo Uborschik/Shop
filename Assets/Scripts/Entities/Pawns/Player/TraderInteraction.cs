@@ -1,32 +1,37 @@
-﻿using Game.Services.InputSystem;
-using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.Entities.Pawns.Player
 {
-    [Serializable]
     public class TraderInteraction
     {
-        private readonly Pawn pawn;
         private readonly Transform cameraTransform;
 
-        public TraderInteraction(Pawn pawn, Transform cameraTransform)
+        private RaycastHit hit;
+
+        public TraderInteraction(TraderCameraConfig cameraConfig)
         {
-            this.pawn = pawn;
-            this.cameraTransform = cameraTransform;
+            cameraTransform = cameraConfig.TraderCamera.transform;
         }
 
-        public void OnInteract(InteractionMode mode)
+        public void RayCast(Hand hand)
         {
-            var tool = pawn.ToolHolder.Tool;
+            Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, hand.RayDistance, hand.InteractionMask);
+        }
 
-            if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, tool.RayDistance, tool.InteractionMask))
+        public void OnInteract(Pawn pawn, InteractionMode mode)
+        {
+            if (hit.collider != null)
             {
                 if (hit.collider.TryGetComponent<IInteractable>(out var interactable))
                 {
-                    tool.Use(interactable, pawn, mode);
+                    pawn.Hand.Use(interactable, pawn, mode);
                 }
             }
+        }
+
+        public void DropItem(Hand hand)
+        {
+            hand.DropItem();
         }
     }
 }

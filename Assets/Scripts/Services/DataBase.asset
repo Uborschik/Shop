@@ -9,16 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 69e08f765b3287f42b1d631f06516edd, type: 3}
   m_Name: DataBase
-  m_EditorClassIdentifier: Assembly-CSharp:Game.Entities:DataBase
-  prefabs:
-  - {fileID: 8531818284466489097, guid: 845250ee574e53b41b55b94f1072ea7e, type: 3}
-  - {fileID: 2318639293712312979, guid: 57cb48f17ba580e42a42e6269afe7cc2, type: 3}
-  - {fileID: 5176712731108015974, guid: df71026b34125e0448c2113844ea56c2, type: 3}
-  - {fileID: 5261441240754643831, guid: 03bff057c2c3b6b42b53abb0e1b37d63, type: 3}
-  - {fileID: 8696332829081455448, guid: b38bfaddf2586854ab22161ed638a7a1, type: 3}
-  - {fileID: 101594626434981015, guid: 1460064a966d22649902a90d2951ec4a, type: 3}
-  - {fileID: 3437444627927445085, guid: 120af65534f29a441a24b2c2dd155f6a, type: 3}
-  - {fileID: 6478785543301342423, guid: 8c558b1f6c5848640a71ffb5aa10d6e4, type: 3}
-  - {fileID: 7559466320321026828, guid: f67d201e606fd5f4291fb133a8d01cd2, type: 3}
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.DataBase
+  prefabs: []

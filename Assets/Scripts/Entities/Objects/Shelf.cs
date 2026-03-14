@@ -1,6 +1,5 @@
-﻿using Game.Entities.Pawns;
-using Game.Entities.Tools;
-using Game.Services.InputSystem;
+﻿using Game.Entities.Items;
+using Game.Entities.Pawns;
 using Game.Services.Inventory;
 using UnityEngine;
 
@@ -21,44 +20,34 @@ namespace Game.Entities.Objects
 
         public override InteractionResult Interact(Pawn pawn, InteractionMode mode)
         {
-            var tool = pawn.ToolHolder.Tool;
+            var item = pawn.Hand.Item;
 
             switch (mode)
             {
                 case InteractionMode.Primary:
-                    return PrimaryAction(tool);
+                    return PrimaryAction(item);
                 case InteractionMode.Secondary:
-                    return SecondaryAction(tool);
+                    return SecondaryAction(item);
                 default:
                     return InteractionResult.Failure;
             }
         }
 
-        private InteractionResult PrimaryAction(Tool tool)
+        private InteractionResult PrimaryAction(Item item)
         {
-            if (tool is IGridStorageHolder holder)
+            if (item is IGridStorageHolder holder)
             {
-                if (!storage.TryGetPushIndex(out var index)) return InteractionResult.Failure;
-                if (!holder.Storage.TryRemoveItem(out var item)) return InteractionResult.Failure;
-
-                item.PushTo(placement.transform, placement.Slots[index], Quaternion.identity);
-
-                storage.Push(index, item);
-
-                return InteractionResult.Success;
+                if (!storage.TryAddTo(holder.Storage)) return InteractionResult.Failure;
             }
 
             return InteractionResult.Failure;
         }
 
-        private InteractionResult SecondaryAction(Tool tool)
+        private InteractionResult SecondaryAction(Item item)
         {
-            if (tool is IGridStorageHolder holder)
+            if (item is IGridStorageHolder holder)
             {
-                if (!storage.TryRemoveItem(out var item)) return InteractionResult.Failure;
-                if (!holder.Storage.TryAddItem(item)) return InteractionResult.Failure;
-
-                return InteractionResult.Success;
+                if (!(holder.Storage.TryAddTo(storage))) return InteractionResult.Failure;
             }
 
             return InteractionResult.Failure;

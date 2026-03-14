@@ -15,18 +15,19 @@ namespace Game.Entities.Pawns.Player
     {
         private readonly Transform cameraTransform;
         private readonly CharacterController controller;
+
         private Vector3 moveDirection;
         private float verticalVelocity;
         private bool jumpPressed;
 
-        private readonly MovementConfig config;
+        private readonly MovementConfig movementConfig;
 
-        public TraderMovement(Transform cameraTransform, CharacterController controller, MovementConfig config)
+        public TraderMovement(TraderCameraConfig cameraConfig, CharacterController controller, MovementConfig movementConfig)
         {
-            this.cameraTransform = cameraTransform;
+            cameraTransform = cameraConfig.TraderCamera.transform;
             this.controller = controller;
 
-            this.config = config;
+            this.movementConfig = movementConfig;
         }
 
         public void SetMovement(Vector2 inputDirection)
@@ -56,13 +57,13 @@ namespace Game.Entities.Pawns.Player
 
             if (jumpPressed && controller.isGrounded)
             {
-                verticalVelocity = config.JumpSpeed;
+                verticalVelocity = movementConfig.JumpSpeed;
                 jumpPressed = false;
             }
 
-            verticalVelocity += config.Gravity * Time.deltaTime;
+            verticalVelocity += movementConfig.Gravity * Time.deltaTime;
 
-            var motion = moveDirection * config.MoveSpeed + Vector3.up * verticalVelocity;
+            var motion = moveDirection * movementConfig.MoveSpeed + Vector3.up * verticalVelocity;
             controller.Move(motion * Time.deltaTime);
         }
     }

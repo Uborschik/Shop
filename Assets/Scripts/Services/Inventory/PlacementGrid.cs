@@ -10,7 +10,7 @@ namespace Game.Services.Inventory
         [SerializeField] private Vector3 cellSize = new(0.2f, 0.2f, 0.2f);
         [SerializeField] private Vector3 gap = Vector3.zero;
 
-        private List<Vector3> slots = new();
+        private readonly List<Vector3> slots = new();
 
         public IReadOnlyList<Vector3> Slots => slots;
 

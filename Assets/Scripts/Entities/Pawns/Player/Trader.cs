@@ -1,35 +1,16 @@
-﻿using Game.Entities.Tools;
-using Game.Services.InputSystem;
+﻿using Game.Services.InputSystem;
 using UnityEngine;
+using VContainer;
 
 namespace Game.Entities.Pawns.Player
 {
     [RequireComponent(typeof(CharacterController))]
-    public class Trader : Pawn, IInteractor
+    public class Trader : Pawn
     {
-        [SerializeField] private int cash;
-
-        [Header("Settings")]
-        [SerializeField] private MovementConfig movementConfig;
-        [SerializeField] private TraderCameraConfig cameraConfig;
-
-        private PlayerInputs input;
-
-        private TraderMovement movement;
-        private TraderLook look;
-        private TraderInteraction interaction;
-
-        private void Awake()
-        {
-            var initialTool = transform.GetComponentInChildren<Tool>();
-            var characterController = GetComponent<CharacterController>();
-
-            input = new();
-
-            movement = new(cameraConfig.TraderCamera.transform, characterController, movementConfig);
-            look = new(transform, cameraConfig.TraderCamera.transform, cameraConfig);
-            interaction = new(this, cameraConfig.TraderCamera.transform);
-        }
+        [Inject] private readonly PlayerInputs input;
+        [Inject] private readonly TraderMovement movement;
+        [Inject] private readonly TraderLook look;
+        [Inject] private readonly TraderInteraction interaction;
 
         private void Start()
         {
@@ -42,6 +23,7 @@ namespace Game.Entities.Pawns.Player
             if (input == null) return;
 
             input.Jump += OnJump;
+            input.Drop += OnDrop;
             input.Interact += OnInteract;
             input.AltInteract += OnInteract;
         }
@@ -51,6 +33,7 @@ namespace Game.Entities.Pawns.Player
             if (input == null) return;
 
             input.Jump -= OnJump;
+            input.Drop -= OnDrop;
             input.Interact -= OnInteract;
             input.AltInteract -= OnInteract;
 
@@ -68,9 +51,13 @@ namespace Game.Entities.Pawns.Player
             look.AddLook(input.MouseDelta);
         }
 
-        public void AddCash(int amount) => cash += amount;
+        private void FixedUpdate()
+        {
+            interaction.RayCast(Hand);
+        }
 
         private void OnJump() => movement?.Jump();
-        private void OnInteract(InteractionMode mode) => interaction?.OnInteract(mode);
+        private void OnDrop() => interaction?.DropItem(Hand);
+        private void OnInteract(InteractionMode mode) => interaction?.OnInteract(this, mode);
     }
 }

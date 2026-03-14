@@ -16,20 +16,20 @@ namespace Game.Entities.Pawns.Player
         private readonly Transform cameraTransform;
         private float xRotation;
 
-        private readonly TraderCameraConfig config;
+        private readonly TraderCameraConfig cameraConfig;
 
-        public TraderLook(Transform playerTransform, Transform cameraTransform, TraderCameraConfig config)
+        public TraderLook(CharacterController characterController, TraderCameraConfig cameraConfig)
         {
-            this.playerTransform = playerTransform;
-            this.cameraTransform = cameraTransform;
+            playerTransform = characterController.transform;
+            this.cameraConfig = cameraConfig;
 
-            this.config = config;
+            cameraTransform = cameraConfig.TraderCamera.transform;
         }
 
         public void AddLook(Vector2 delta)
         {
-            var mouseX = delta.x * config.MouseSensitivity;
-            var mouseY = delta.y * config.MouseSensitivity;
+            var mouseX = delta.x * cameraConfig.MouseSensitivity;
+            var mouseY = delta.y * cameraConfig.MouseSensitivity;
 
             playerTransform.Rotate(Vector3.up, mouseX);
 

@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7809758622272567101}
-  m_Layer: 0
+  - component: {fileID: 2309665395780823775}
+  m_Layer: 10
   m_Name: Hand
   m_TagString: Untagged
-  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -31,6 +32,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 932439715090100331}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2309665395780823775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5594885121638137209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edae7728fe3d3d04483c6d5794922e86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.Pawns.Player.Hand
+  defaultMask:
+    serializedVersion: 2
+    m_Bits: 896
+  <RayDistance>k__BackingField: 2.5
+  <Item>k__BackingField: {fileID: 0}
 --- !u!1 &6655818118163729969
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,7 +61,7 @@ GameObject:
   - component: {fileID: 4259225225994365970}
   - component: {fileID: 8523360277287566310}
   - component: {fileID: 1256194590024285713}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -59,7 +77,7 @@ Transform:
   m_GameObject: {fileID: 6655818118163729969}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.79999995, z: 0}
+  m_LocalPosition: {x: -0, y: 0.79999995, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -178,11 +196,12 @@ GameObject:
   m_Component:
   - component: {fileID: 932439715090100331}
   - component: {fileID: 2245678484545936374}
+  - component: {fileID: 2939829386507297298}
   - component: {fileID: 8531818284466489097}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -194,15 +213,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6861530546926402358}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.98614424, z: -0, w: 0.1658905}
-  m_LocalPosition: {x: -0.7, y: 0, z: 2.03}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 83375007918279811}
   - {fileID: 7809758622272567101}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 160.902, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &2245678484545936374
 CharacterController:
   m_ObjectHideFlags: 0
@@ -228,6 +247,33 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &2939829386507297298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6861530546926402358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e5a1525b604a64ca2396e5edcdbfca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scopes.TraderScope
+  parentReference:
+    TypeName: Game.Core.Scopes.GameplayLifetimeScope
+  autoRun: 1
+  autoInjectGameObjects:
+  - {fileID: 6861530546926402358}
+  movementConfig:
+    Gravity: -9.81
+    JumpSpeed: 5
+    MoveSpeed: 5
+  cameraConfig:
+    TraderCamera: {fileID: 4259225225994365970}
+    MouseSensitivity: 0.15
+  traderCharacterController: {fileID: 2245678484545936374}
+  hand: {fileID: 2309665395780823775}
+  trader: {fileID: 8531818284466489097}
 --- !u!114 &8531818284466489097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,16 +286,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2c070c4fc02caf47bf24bc426be2d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Player.Pawn
-  playerCamera: {fileID: 4259225225994365970}
-  hand: {fileID: 7809758622272567101}
-  movementConfig:
-    Gravity: -9.81
-    JumpSpeed: 5
-    MoveSpeed: 5
-  cameraConfig:
-    MouseSensitivity: 0.15
-  containerCount: 6
-  interactionDistance: 3
 --- !u!1 &8695551680988429414
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +295,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 83375007918279811}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}

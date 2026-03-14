@@ -1,5 +1,5 @@
-﻿using Game.Entities.Items;
-using System.Collections.Generic;
+﻿using Game.Entities;
+using Game.Entities.Items;
 using UnityEngine;
 
 namespace Game.Services.Inventory
@@ -7,32 +7,35 @@ namespace Game.Services.Inventory
     public class GridStorage
     {
         private readonly Container container;
-        private readonly PlacementGrid placement;
+        private readonly PlacementGrid placementGrid;
 
         public GridStorage(PlacementGrid placement)
         {
-            this.placement = placement;
+            this.placementGrid = placement;
             container = new Container(placement.Slots.Count);
         }
 
         public bool TryAddItem(Item item)
         {
-            if (!container.TryGetPushIndex(out var index)) return false;
+            if (!container.TryGetPushIndex(out var push)) return false;
 
-            PlaceItemVisuals(item, index);
-            container.Push(index, item);
+            PlaceItemVisuals(item, push);
+
+            container.Push(push, item);
+
             return true;
         }
 
-        public bool TryRemoveItem(out Item item)
+        public bool TryAddTo(GridStorage storage)
         {
-            if (!container.TryGetPullIndex(out var index))
-            {
-                item = null;
-                return false;
-            }
+            if (!storage.TryGetPullIndex(out var pull)) return false;
+            if (!TryGetPushIndex(out var push)) return false;
 
-            item = container.Pull(index);
+            var item = storage.Pull(pull);
+
+            Push(push, item);
+            PlaceItemVisuals(item, push);
+
             return true;
         }
 
@@ -48,7 +51,8 @@ namespace Game.Services.Inventory
 
         private void PlaceItemVisuals(Item item, int index)
         {
-            item.PushTo(placement.transform, placement.Slots[index], Quaternion.identity);
+            var position = placementGrid.transform.position + placementGrid.Slots[index];
+            item.OnPickup(placementGrid.transform, position);
         }
     }
 }

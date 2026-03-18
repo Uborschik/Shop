@@ -1,63 +1,94 @@
-﻿using Game.Services.InputSystem;
+﻿using Game.Core.Controllable;
+using Game.Services.InputSystem;
 using UnityEngine;
-using VContainer;
 
 namespace Game.Entities.Pawns.Player
 {
     [RequireComponent(typeof(CharacterController))]
-    public class Trader : Pawn
+    public class Trader : MonoBehaviour, IControllable, IBody
     {
-        [Inject] private readonly PlayerInputs input;
-        [Inject] private readonly TraderMovement movement;
-        [Inject] private readonly TraderLook look;
-        [Inject] private readonly TraderInteraction interaction;
+        [SerializeField] private WalkableMovementConfig movementConfig;
 
-        private void Start()
+        private CharacterController characterController;
+        private WalkableInputs inputs;
+        private WalkableMovement movement;
+
+        public ControlFlag CurrentFlags { get; private set; }
+        public Transform Transform => transform;
+        public bool IsPhysicsEnabled => characterController.enabled;
+
+        private void Awake()
         {
+            characterController = GetComponent<CharacterController>();
+            inputs = new();
+            movement = new(characterController, inputs, movementConfig);
+        }
+
+        public void SetCamera(Transform transform)
+        {
+            movement.SetCamera(transform);
+
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
 
-        private void OnEnable()
-        {
-            if (input == null) return;
+        #region IControllable
 
-            input.Jump += OnJump;
-            input.Drop += OnDrop;
-            input.Interact += OnInteract;
-            input.AltInteract += OnInteract;
+        public void Possess(ControlFlag grantedFlags)
+        {
+            if (grantedFlags.HasFlag(ControlFlag.Movement))
+            {
+                CurrentFlags |= ControlFlag.Movement;
+                inputs.Enable();
+
+                inputs.Jump += movement.OnJump;
+            }
         }
 
-        private void OnDisable()
+        public void Release(ControlFlag flagsToRelease)
         {
-            if (input == null) return;
+            if (flagsToRelease.HasFlag(ControlFlag.Movement))
+            {
+                CurrentFlags &= ~ControlFlag.Movement;
+                inputs.Disable();
+                movement.Reset();
 
-            input.Jump -= OnJump;
-            input.Drop -= OnDrop;
-            input.Interact -= OnInteract;
-            input.AltInteract -= OnInteract;
-
-            input.Dispose();
+                inputs.Jump -= movement.OnJump;
+            }
         }
 
-        private void Update()
+        public void OnTick(ControlFlag availableFlags)
         {
-            movement.SetMovement(input.MovementDirection);
-            movement.Tick();
+            if (availableFlags.HasFlag(ControlFlag.Movement)) movement.Tick();
         }
 
-        private void LateUpdate()
+        public void OnFixedTick(ControlFlag availableFlags) { }
+        public void OnLateTick(ControlFlag availableFlags) { }
+
+        #endregion
+
+        #region IBody
+
+        public void EnablePhysics() => characterController.enabled = true;
+
+        public void DisablePhysics() => characterController.enabled = false;
+
+        public void AttachTo(Transform parent, Vector3 localPosition, Quaternion localRotation)
         {
-            look.AddLook(input.MouseDelta);
+            transform.SetParent(parent);
+            transform.localPosition = localPosition;
+            transform.localRotation = localRotation;
+            DisablePhysics();
         }
 
-        private void FixedUpdate()
+        public void DetachTo(Vector3 worldPosition, Quaternion worldRotation)
         {
-            interaction.RayCast(Hand);
+            transform.SetParent(null);
+            transform.position = worldPosition;
+            transform.rotation = worldRotation;
+            EnablePhysics();
         }
 
-        private void OnJump() => movement?.Jump();
-        private void OnDrop() => interaction?.DropItem(Hand);
-        private void OnInteract(InteractionMode mode) => interaction?.OnInteract(this, mode);
+        #endregion
     }
 }

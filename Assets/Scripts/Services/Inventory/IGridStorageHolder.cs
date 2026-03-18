@@ -1,6 +1,4 @@
-﻿using Game.Services.Inventory;
-
-namespace Game.Entities
+﻿namespace Game.Services.Inventory
 {
     public interface IGridStorageHolder
     {

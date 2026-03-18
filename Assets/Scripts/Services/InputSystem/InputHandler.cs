@@ -6,6 +6,9 @@ namespace Game.Services.InputSystem
     {
         protected readonly InputControls Inputs;
 
+        public abstract void Enable();
+        public abstract void Disable();
+
         public InputHandler()
         {
             Inputs = new();

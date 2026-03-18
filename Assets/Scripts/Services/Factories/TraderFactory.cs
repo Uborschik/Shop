@@ -1,22 +1,25 @@
-﻿using Game.Core.Scopes;
-using Game.Entities.Pawns;
+﻿using Game.Entities.Pawns.Player;
 using System;
 using VContainer;
 using VContainer.Unity;
 
 namespace Game.Services.Factories
 {
-    public class TraderFactory
+    public interface IPlayerFactory
+    {
+        Trader Create();
+    }
+
+    public class TraderFactory : IPlayerFactory
     {
         public event Action TraderCreated;
 
-        [Inject] private readonly LifetimeScope lifetimeScope;
-        [Inject] private readonly TraderScope traderScope;
+        [Inject] private readonly IObjectResolver resolver;
+        [Inject] private readonly Trader prefab;
 
-        public Pawn Create()
+        public Trader Create()
         {
-            var scope = lifetimeScope.CreateChildFromPrefab(traderScope);
-            var pawn = scope.GetComponent<Pawn>();
+            var pawn = resolver.Instantiate(prefab);
 
             TraderCreated?.Invoke();
             return pawn;

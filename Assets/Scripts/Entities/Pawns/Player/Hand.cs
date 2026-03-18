@@ -1,12 +1,14 @@
-﻿using Game.Entities.Items;
+﻿using Game.Entities.Interactables;
+using Game.Entities.Items;
 using Game.Entities.Items.Tools;
-using System;
 using UnityEngine;
 
 namespace Game.Entities.Pawns.Player
 {
     public class Hand : MonoBehaviour
     {
+
+        [SerializeField] private Transform handTransform;
         [SerializeField] private LayerMask defaultMask;
 
         [field: SerializeField] public float RayDistance { get; protected set; }
@@ -20,14 +22,14 @@ namespace Game.Entities.Pawns.Player
             InteractionMask = defaultMask;
         }
 
-        public void Use(IInteractable interactable, Pawn pawn, InteractionMode mode) => interactable?.Interact(pawn, mode);
+        public void Use(IInteractable interactable, InteractionContext context, InteractionMode mode) => interactable?.Interact(context, mode);
 
         public void Pickup(Item item)
         {
             if (Item) DropItem();
 
             Item = item;
-            Item.OnPickup(transform);
+            Item.OnPickup(handTransform);
 
             if (item is Tool tool)
             {

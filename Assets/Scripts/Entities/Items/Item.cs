@@ -1,4 +1,6 @@
-﻿using Game.Entities.Pawns;
+﻿using Game.Entities.Interactables;
+using Game.Entities.Pawns.Player;
+using Game.Services.Inventory;
 using UnityEngine;
 
 namespace Game.Entities.Items
@@ -18,16 +20,16 @@ namespace Game.Entities.Items
             collision = GetComponent<Collider>();
         }
 
-        public InteractionResult Interact(Pawn pawn, InteractionMode mode)
+        public InteractionResult Interact(InteractionContext context, InteractionMode mode)
         {
             switch (mode)
             {
                 case InteractionMode.Primary:
-                    pawn.Hand.Pickup(this);
+                    context.Hand.Pickup(this);
                     return InteractionResult.Success;
                 case InteractionMode.Secondary:
 
-                    if (pawn.Hand.Item is IGridStorageHolder gridStorage)
+                    if (context.Hand.Item is IGridStorageHolder gridStorage)
                     {
                         gridStorage.Storage.TryAddItem(this);
                     }

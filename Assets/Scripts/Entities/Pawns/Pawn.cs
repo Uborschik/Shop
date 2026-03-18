@@ -6,6 +6,6 @@ namespace Game.Entities.Pawns
 {
     public abstract class Pawn : MonoBehaviour
     {
-        [Inject] public Hand Hand { get; protected set; }
+        public Hand Hand { get; protected set; }
     }
 }

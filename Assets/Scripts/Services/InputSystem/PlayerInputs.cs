@@ -1,4 +1,5 @@
 ﻿using Game.Entities;
+using Game.Entities.Interactables;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,40 +8,23 @@ namespace Game.Services.InputSystem
 {
     public class PlayerInputs : InputHandler, InputControls.IPlayerActions
     {
-        public Vector2 MovementDirection { get; private set; }
         public Vector2 MouseDelta { get; private set; }
 
-        public event Action Jump;
         public event Action Drop;
         public event Action<InteractionMode> Interact;
         public event Action<InteractionMode> AltInteract;
 
         public PlayerInputs()
         {
-            Inputs.Player.AddCallbacks(this);
+            Enable();
         }
 
-        public override void Dispose()
-        {
-            Inputs.Player.RemoveCallbacks(this);
-
-            base.Dispose();
-        }
-
-        public void OnMovement(InputAction.CallbackContext context)
-        {
-            MovementDirection = context.ReadValue<Vector2>();
-        }
+        public override void Enable() => Inputs.Player.AddCallbacks(this);
+        public override void Disable() => Inputs.Player.RemoveCallbacks(this);
 
         public void OnLook(InputAction.CallbackContext context)
         {
             MouseDelta = context.ReadValue<Vector2>();
-        }
-
-        public void OnJump(InputAction.CallbackContext context)
-        {
-            if (context.phase == InputActionPhase.Performed)
-                Jump?.Invoke();
         }
 
         public void OnDrop(InputAction.CallbackContext context)

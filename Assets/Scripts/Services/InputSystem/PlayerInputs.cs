@@ -14,13 +14,16 @@ namespace Game.Services.InputSystem
         public event Action<InteractionMode> Interact;
         public event Action<InteractionMode> AltInteract;
 
-        public PlayerInputs()
+        public override void Enable()
         {
-            Enable();
+            Inputs.Player.Enable();
+            Inputs.Player.AddCallbacks(this);
         }
-
-        public override void Enable() => Inputs.Player.AddCallbacks(this);
-        public override void Disable() => Inputs.Player.RemoveCallbacks(this);
+        public override void Disable()
+        {
+            Inputs.Player.RemoveCallbacks(this);
+            Inputs.Player.Disable();
+        }
 
         public void OnLook(InputAction.CallbackContext context)
         {

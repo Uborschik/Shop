@@ -1,16 +1,19 @@
 ﻿using Game.Core.Controllable;
+using Game.Entities.Player;
 using Game.Services.InputSystem;
+using Unity.Cinemachine;
 using UnityEngine;
 
 namespace Game.Entities.Pawns.Player
 {
     [RequireComponent(typeof(CharacterController))]
-    public class Trader : MonoBehaviour, IControllable, IBody
+    public class Trader : MonoBehaviour, IBody
     {
         [SerializeField] private WalkableMovementConfig movementConfig;
+        [SerializeField] private CinemachineCamera vcam;
 
-        private CharacterController characterController;
         private WalkableInputs inputs;
+        private CharacterController characterController;
         private WalkableMovement movement;
 
         public ControlFlag CurrentFlags { get; private set; }
@@ -19,17 +22,21 @@ namespace Game.Entities.Pawns.Player
 
         private void Awake()
         {
-            characterController = GetComponent<CharacterController>();
             inputs = new();
-            movement = new(characterController, inputs, movementConfig);
+            characterController = GetComponent<CharacterController>();
+            movement = new(characterController, inputs, vcam.transform, movementConfig);
         }
 
-        public void SetCamera(Transform transform)
+        private void Update()
         {
-            movement.SetCamera(transform);
+            if (CurrentFlags.HasFlag(ControlFlag.Movement))
+                movement.Tick();
+        }
 
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+        private void LateUpdate()
+        {
+            if (CurrentFlags.HasFlag(ControlFlag.Movement))
+                movement.RotateTowardsMovement();
         }
 
         #region IControllable
@@ -39,9 +46,16 @@ namespace Game.Entities.Pawns.Player
             if (grantedFlags.HasFlag(ControlFlag.Movement))
             {
                 CurrentFlags |= ControlFlag.Movement;
+                vcam.Priority = 10;
                 inputs.Enable();
-
                 inputs.Jump += movement.OnJump;
+            }
+
+            if (grantedFlags.HasFlag(ControlFlag.Look))
+            {
+                CurrentFlags |= ControlFlag.Look;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
             }
         }
 
@@ -50,44 +64,26 @@ namespace Game.Entities.Pawns.Player
             if (flagsToRelease.HasFlag(ControlFlag.Movement))
             {
                 CurrentFlags &= ~ControlFlag.Movement;
-                inputs.Disable();
+                vcam.Priority = 0;
                 movement.Reset();
-
+                inputs.Disable();
                 inputs.Jump -= movement.OnJump;
             }
-        }
 
-        public void OnTick(ControlFlag availableFlags)
-        {
-            if (availableFlags.HasFlag(ControlFlag.Movement)) movement.Tick();
+            if (flagsToRelease.HasFlag(ControlFlag.Look))
+            {
+                CurrentFlags &= ~ControlFlag.Look;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
         }
-
-        public void OnFixedTick(ControlFlag availableFlags) { }
-        public void OnLateTick(ControlFlag availableFlags) { }
 
         #endregion
 
         #region IBody
 
         public void EnablePhysics() => characterController.enabled = true;
-
         public void DisablePhysics() => characterController.enabled = false;
-
-        public void AttachTo(Transform parent, Vector3 localPosition, Quaternion localRotation)
-        {
-            transform.SetParent(parent);
-            transform.localPosition = localPosition;
-            transform.localRotation = localRotation;
-            DisablePhysics();
-        }
-
-        public void DetachTo(Vector3 worldPosition, Quaternion worldRotation)
-        {
-            transform.SetParent(null);
-            transform.position = worldPosition;
-            transform.rotation = worldRotation;
-            EnablePhysics();
-        }
 
         #endregion
     }

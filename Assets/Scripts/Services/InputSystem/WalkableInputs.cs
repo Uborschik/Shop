@@ -10,8 +10,16 @@ namespace Game.Services.InputSystem
 
         public event Action Jump;
 
-        public override void Enable() => Inputs.WalkableMovement.SetCallbacks(this);
-        public override void Disable() => Inputs.WalkableMovement.RemoveCallbacks(this);
+        public override void Enable()
+        {
+            Inputs.WalkableMovement.Enable();
+            Inputs.WalkableMovement.AddCallbacks(this);
+        }
+        public override void Disable()
+        {
+            Inputs.WalkableMovement.RemoveCallbacks(this);
+            Inputs.WalkableMovement.Disable();
+        }
 
         public void OnMovement(InputAction.CallbackContext context)
         {

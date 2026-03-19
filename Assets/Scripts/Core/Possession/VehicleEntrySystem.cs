@@ -40,7 +40,7 @@ namespace Game.Core.Possession
 
             vehicle.DriverSeat.Vacate(driverBody);
             driverBody.EnablePhysics();
-            driverBody.DetachTo(validPoint, Quaternion.LookRotation(vehicle.Transform.forward));
+            //driverBody.DetachTo(validPoint, Quaternion.LookRotation(vehicle.Transform.forward));
 
             vehicle.ExitRequested -= () => TryExitVehicle(driverBody, driverController, vehicle);
 

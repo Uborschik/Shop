@@ -11,12 +11,20 @@ namespace Game.Services.InputSystem
         public float Yaw { get; private set; }
         public float Pitch { get; private set; }
 
-        public override void Enable() => Inputs.VehicleMovement.SetCallbacks(this);
-        public override void Disable() => Inputs.VehicleMovement.RemoveCallbacks(this);
+        public override void Enable()
+        {
+            Inputs.VehicleMovement.Enable();
+            Inputs.VehicleMovement.AddCallbacks(this);
+        }
+        public override void Disable()
+        {
+            Inputs.VehicleMovement.RemoveCallbacks(this);
+            Inputs.VehicleMovement.Disable();
+        }
 
         public void OnAnchor(InputAction.CallbackContext context)
         {
-            if(context.phase == InputActionPhase.Started)
+            if (context.phase == InputActionPhase.Started)
             {
                 Anchor?.Invoke();
             }

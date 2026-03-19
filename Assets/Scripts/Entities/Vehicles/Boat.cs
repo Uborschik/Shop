@@ -1,13 +1,16 @@
 ﻿using Game.Core.Controllable;
 using Game.Core.Possession;
+using Game.Entities.Player;
 using Game.Services.InputSystem;
 using System;
+using Unity.Cinemachine;
 using UnityEngine;
+using VContainer;
 
 namespace Game.Entities.Vehicles
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class Boat : MonoBehaviour, IVehicle, IControllable
+    public class Boat : MonoBehaviour, IVehicle
     {
         [Header("Config")]
         [SerializeField] private BoatMovementConfig movementConfig;
@@ -16,10 +19,10 @@ namespace Game.Entities.Vehicles
         [SerializeField] private float exitValidationRadius = 1f;
         [SerializeField] private LayerMask groundMask;
 
+        private VehicleInputs inputs;
         private Rigidbody rb;
         private SimpleSeat seat;
         private BoatMovement movement;
-        private VehicleInputs inputs;
 
         public event Action ExitRequested;
 
@@ -32,13 +35,15 @@ namespace Game.Entities.Vehicles
         public bool CanEnter => !seat.IsOccupied;
         public bool CanExit => seat.IsOccupied && ValidateExit();
 
+        public CinemachineCamera VirtualCamera => throw new NotImplementedException();
+
         private void Awake()
         {
+            inputs = new();
             rb = GetComponent<Rigidbody>();
             rb.useGravity = true;
 
             seat = new SimpleSeat(driverSeatPoint);
-            inputs = new VehicleInputs();
             movement = new BoatMovement(rb, inputs, movementConfig);
         }
 
@@ -47,7 +52,7 @@ namespace Game.Entities.Vehicles
 
         #region IControllable
 
-        public void Possess(ControlFlag grantedFlags)
+        public void Possess(ICameraProvider cameraProvider, ControlFlag grantedFlags)
         {
             if (grantedFlags.HasFlag(ControlFlag.Movement))
             {
@@ -111,6 +116,11 @@ namespace Game.Entities.Vehicles
             if (!hasGround) return false;
 
             return !Physics.CheckSphere(ExitPoint.position, exitValidationRadius);
+        }
+
+        public void Possess(ControlFlag grantedFlags)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Game.Services.InputSystem;
 using System;
+using Unity.Cinemachine;
 using UnityEngine;
 
 namespace Game.Entities.Pawns.Player
@@ -17,21 +18,21 @@ namespace Game.Entities.Pawns.Player
     {
         private readonly CharacterController controller;
         private readonly WalkableInputs inputs;
+        private readonly Transform cameraTransform;
         private readonly WalkableMovementConfig config;
 
-        private Transform cameraTransform;
         private Vector3 horizontalVelocity;
+        private Quaternion horizontalRotation;
         private float verticalVelocity;
         private bool jumpPressed;
 
-        public WalkableMovement(CharacterController controller, WalkableInputs inputs, WalkableMovementConfig config)
+        public WalkableMovement(CharacterController controller, WalkableInputs inputs, Transform cameraTransform, WalkableMovementConfig config)
         {
             this.controller = controller;
             this.inputs = inputs;
+            this.cameraTransform = cameraTransform;
             this.config = config;
         }
-
-        public void SetCamera(Transform camera) => this.cameraTransform = camera;
 
         public void Reset()
         {
@@ -47,7 +48,7 @@ namespace Game.Entities.Pawns.Player
 
         public void Tick()
         {
-            SetHorizontalVelocity();
+            if (!TrySetHorizontalVelocity()) return;
 
             if (controller.isGrounded && verticalVelocity < 0)
                 verticalVelocity = -0.5f;
@@ -64,24 +65,24 @@ namespace Game.Entities.Pawns.Player
             controller.Move(motion * Time.fixedDeltaTime);
         }
 
-        private void SetHorizontalVelocity()
+        private bool TrySetHorizontalVelocity()
         {
-            if (cameraTransform == null) return;
+            if (cameraTransform == null) return false;
 
             var input = inputs.MovementDirection;
 
-            if (input.sqrMagnitude > 0.01f)
-            {
-                var camForward = Vector3.ProjectOnPlane(cameraTransform.forward, Vector3.up).normalized;
-                var camRight = Vector3.ProjectOnPlane(cameraTransform.right, Vector3.up).normalized;
+            var horizontalCameraForward = new Vector3(cameraTransform.forward.x, 0, cameraTransform.forward.z).normalized;
+            horizontalRotation = Quaternion.LookRotation(horizontalCameraForward);
 
-                var moveDir = (camForward * input.y + camRight * input.x).normalized;
-                horizontalVelocity = moveDir * config.MoveSpeed;
-            }
-            else
-            {
-                horizontalVelocity = Vector3.zero;
-            }
+            var moveDir = (horizontalRotation * new Vector3(input.x, 0, input.y)).normalized;
+            horizontalVelocity = moveDir * config.MoveSpeed;
+
+            return true;
+        }
+
+        public void RotateTowardsMovement()
+        {
+            controller.transform.rotation = horizontalRotation;
         }
     }
 }

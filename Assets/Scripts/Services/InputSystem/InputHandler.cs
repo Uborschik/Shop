@@ -12,7 +12,6 @@ namespace Game.Services.InputSystem
         public InputHandler()
         {
             Inputs = new();
-            Inputs.Enable();
         }
 
         public virtual void Dispose()

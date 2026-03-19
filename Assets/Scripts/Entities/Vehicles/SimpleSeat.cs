@@ -21,7 +21,7 @@ namespace Game.Entities.Vehicles
 
             currentBody = body;
             body.DisablePhysics();
-            body.AttachTo(Transform, Vector3.zero, Quaternion.identity);
+            //body.AttachTo(Transform, Vector3.zero, Quaternion.identity);
             return true;
         }
 

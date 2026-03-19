@@ -9,13 +9,12 @@ namespace Game.Entities.Interactables
     {
         [SerializeField] private MonoBehaviour vehicleComponent;
 
-        [Inject] private readonly PossessionRouter possessionRouter;
-
         private IVehicle vehicle;
 
         private void Start()
         {
             vehicle = vehicleComponent as IVehicle;
+
             if (vehicle == null)
                 Debug.LogError($"{name}: vehicleComponent не реализует IVehicle!");
         }
@@ -26,11 +25,9 @@ namespace Game.Entities.Interactables
 
             if (mode == InteractionMode.Primary)
             {
-                possessionRouter.EnterVehicle(vehicle);
                 return InteractionResult.Success;
             }
 
-            possessionRouter.ExitVehicle(vehicle);
             return InteractionResult.Success;
         }
     }

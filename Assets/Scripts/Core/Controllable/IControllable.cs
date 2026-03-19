@@ -6,9 +6,5 @@ namespace Game.Core.Controllable
 
         void Possess(ControlFlag grantedFlags);
         void Release(ControlFlag flagsToRelease);
-
-        void OnTick(ControlFlag availableFlags);
-        void OnFixedTick(ControlFlag availableFlags);
-        void OnLateTick(ControlFlag availableFlags);
     }
 }

@@ -1,76 +1,48 @@
 using Game.Core.Controllable;
-using Game.Core.Possession;
 using Game.Entities.Pawns.Player;
 using Game.Services.InputSystem;
+using Unity.Cinemachine;
 using UnityEngine;
-using VContainer;
 
 namespace Game.Entities.Player
 {
-    public class PlayerEntity : MonoBehaviour
+    public interface ICameraProvider
     {
-        [SerializeField] private PlayerCameraConfig cameraConfig;
+        Transform CameraTransform { get; }
+    }
+
+    public class PlayerEntity : MonoBehaviour, ICameraProvider
+    {
         [SerializeField] private LayerMask interactionMask;
 
-        private PlayerInputs inputs;
-        private PlayerCamera playerCamera;
-        private PlayerInteraction playerInteraction;
         private IBody currentBody;
+        private Camera mainCamera;
+        private PlayerInputs inputs;
+        private PlayerInteraction playerInteraction;
 
-        public PlayerCamera PlayerCamera => playerCamera;
-        public IBody CurrentBody => currentBody;
-        public Vector3 LookDirection => playerCamera.Transform.forward;
-        public Ray LookRay => new(playerCamera.Transform.position, playerCamera.Transform.forward);
+        public PlayerInputs Inputs => inputs;
+        public Transform CameraTransform { get; private set; }
 
         private void Awake()
         {
+            mainCamera = Camera.main;
             inputs = new();
-            playerCamera = new(cameraConfig);
             playerInteraction = new();
+
+            CameraTransform = mainCamera.transform;
         }
 
-        private void OnEnable()
-        {
-            inputs.Enable();
-        }
+        private void OnEnable() => inputs.Enable();
 
         private void OnDisable()
         {
             inputs.Disable();
-
-            inputs.Drop -= playerInteraction.DropItem;
-            inputs.Interact -= playerInteraction.OnInteract;
-            inputs.AltInteract -= playerInteraction.OnInteract;
+            UnsubscribeFromInputs();
         }
 
-        public void OnFixedUpdate()
+        private void FixedUpdate()
         {
-            playerInteraction.UpdateRay(LookRay);
-        }
-
-        public void OnLateUpdate()
-        {
-            playerCamera.LateTick(inputs.MouseDelta);
-        }
-
-        public void PossessBody(IBody body)
-        {
-            if (currentBody != null)
-                UnsubscribeFromInputs();
-
-            currentBody = body;
-            playerCamera.AttachTo(body);
-
-            if (body?.Transform.TryGetComponent(out Hand hand) == true)
-            {
-                playerInteraction.AttachTo(hand, body);
-                SubscribeToInputs();
-            }
-            else
-            {
-                Debug.LogWarning($"No Hand found in {body?.Transform.name}");
-                playerInteraction.AttachTo(null, body);
-            }
+            playerInteraction.UpdateRay(mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)));
         }
 
         private void SubscribeToInputs()
@@ -85,6 +57,25 @@ namespace Game.Entities.Player
             inputs.Drop -= playerInteraction.DropItem;
             inputs.Interact -= playerInteraction.OnInteract;
             inputs.AltInteract -= playerInteraction.OnInteract;
+        }
+
+        public void PossessBody(IBody body)
+        {
+            if (currentBody != null)
+                UnsubscribeFromInputs();
+
+            currentBody = body;
+
+            if (body?.Transform.TryGetComponent(out Hand hand) == true)
+            {
+                playerInteraction.AttachTo(hand, body);
+                SubscribeToInputs();
+            }
+            else
+            {
+                Debug.LogWarning($"No Hand found in {body?.Transform.name}");
+                playerInteraction.AttachTo(null, body);
+            }
         }
     }
 }

@@ -10,7 +10,6 @@ namespace Game.Entities.Pawns.Player
     public class Trader : MonoBehaviour, IBody
     {
         [SerializeField] private WalkableMovementConfig movementConfig;
-        [SerializeField] private CinemachineCamera vcam;
 
         private WalkableInputs inputs;
         private CharacterController characterController;
@@ -24,19 +23,13 @@ namespace Game.Entities.Pawns.Player
         {
             inputs = new();
             characterController = GetComponent<CharacterController>();
-            movement = new(characterController, inputs, vcam.transform, movementConfig);
+            movement = new(characterController, inputs, movementConfig);
         }
 
         private void Update()
         {
             if (CurrentFlags.HasFlag(ControlFlag.Movement))
                 movement.Tick();
-        }
-
-        private void LateUpdate()
-        {
-            if (CurrentFlags.HasFlag(ControlFlag.Movement))
-                movement.RotateTowardsMovement();
         }
 
         #region IControllable
@@ -46,7 +39,6 @@ namespace Game.Entities.Pawns.Player
             if (grantedFlags.HasFlag(ControlFlag.Movement))
             {
                 CurrentFlags |= ControlFlag.Movement;
-                vcam.Priority = 10;
                 inputs.Enable();
                 inputs.Jump += movement.OnJump;
             }
@@ -64,7 +56,6 @@ namespace Game.Entities.Pawns.Player
             if (flagsToRelease.HasFlag(ControlFlag.Movement))
             {
                 CurrentFlags &= ~ControlFlag.Movement;
-                vcam.Priority = 0;
                 movement.Reset();
                 inputs.Disable();
                 inputs.Jump -= movement.OnJump;

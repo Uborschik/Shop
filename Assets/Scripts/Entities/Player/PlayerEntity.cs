@@ -1,35 +1,26 @@
 using Game.Core.Controllable;
 using Game.Entities.Pawns.Player;
 using Game.Services.InputSystem;
-using Unity.Cinemachine;
 using UnityEngine;
 
 namespace Game.Entities.Player
 {
-    public interface ICameraProvider
+    public class PlayerEntity : MonoBehaviour
     {
-        Transform CameraTransform { get; }
-    }
-
-    public class PlayerEntity : MonoBehaviour, ICameraProvider
-    {
-        [SerializeField] private LayerMask interactionMask;
+        [SerializeField] private PlayerCameraConfig cameraConfig;
 
         private IBody currentBody;
-        private Camera mainCamera;
         private PlayerInputs inputs;
+        private PlayerCamera playerCamera;
         private PlayerInteraction playerInteraction;
 
         public PlayerInputs Inputs => inputs;
-        public Transform CameraTransform { get; private set; }
 
         private void Awake()
         {
-            mainCamera = Camera.main;
             inputs = new();
+            playerCamera = new(cameraConfig);
             playerInteraction = new();
-
-            CameraTransform = mainCamera.transform;
         }
 
         private void OnEnable() => inputs.Enable();
@@ -42,7 +33,12 @@ namespace Game.Entities.Player
 
         private void FixedUpdate()
         {
-            playerInteraction.UpdateRay(mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)));
+            playerInteraction.UpdateRay(playerCamera.Ray);
+        }
+
+        private void LateUpdate()
+        {
+            playerCamera.LateTick(inputs.MouseDelta);
         }
 
         private void SubscribeToInputs()
@@ -65,6 +61,7 @@ namespace Game.Entities.Player
                 UnsubscribeFromInputs();
 
             currentBody = body;
+            playerCamera.AttachTo(currentBody);
 
             if (body?.Transform.TryGetComponent(out Hand hand) == true)
             {

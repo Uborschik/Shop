@@ -1,8 +1,8 @@
 ﻿<Solution>
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="UniTask.csproj" />
   <Project Path="UniTask.Linq.csproj" />
   <Project Path="VContainer.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="UniTask.Addressables.csproj" />
   <Project Path="PrimeTween.Demo.csproj" />
   <Project Path="VContainer.Editor.csproj" />

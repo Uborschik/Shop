@@ -135,7 +135,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""id"": ""f8ef0279-c567-4ee8-8b83-11f50dd55980"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
-                    ""processors"": ""ScaleVector2(x=8,y=6)"",
+                    ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Look"",
                     ""isComposite"": false,

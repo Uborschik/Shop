@@ -52,7 +52,7 @@ namespace Game.Entities.Vehicles
 
         #region IControllable
 
-        public void Possess(ICameraProvider cameraProvider, ControlFlag grantedFlags)
+        public void Possess(ControlFlag grantedFlags)
         {
             if (grantedFlags.HasFlag(ControlFlag.Movement))
             {
@@ -116,11 +116,6 @@ namespace Game.Entities.Vehicles
             if (!hasGround) return false;
 
             return !Physics.CheckSphere(ExitPoint.position, exitValidationRadius);
-        }
-
-        public void Possess(ControlFlag grantedFlags)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Game.Entities.Pawns.Player
 {
@@ -18,7 +19,6 @@ namespace Game.Entities.Pawns.Player
     {
         private readonly CharacterController controller;
         private readonly WalkableInputs inputs;
-        private readonly Transform cameraTransform;
         private readonly WalkableMovementConfig config;
 
         private Vector3 horizontalVelocity;
@@ -26,11 +26,10 @@ namespace Game.Entities.Pawns.Player
         private float verticalVelocity;
         private bool jumpPressed;
 
-        public WalkableMovement(CharacterController controller, WalkableInputs inputs, Transform cameraTransform, WalkableMovementConfig config)
+        public WalkableMovement(CharacterController controller, WalkableInputs inputs, WalkableMovementConfig config)
         {
             this.controller = controller;
             this.inputs = inputs;
-            this.cameraTransform = cameraTransform;
             this.config = config;
         }
 
@@ -61,28 +60,27 @@ namespace Game.Entities.Pawns.Player
 
             verticalVelocity += config.Gravity * Time.fixedDeltaTime;
 
-            var motion = horizontalVelocity + Vector3.up * verticalVelocity;
+            var motion = controller.transform.TransformDirection(horizontalVelocity) + Vector3.up * verticalVelocity;
             controller.Move(motion * Time.fixedDeltaTime);
         }
 
         private bool TrySetHorizontalVelocity()
         {
-            if (cameraTransform == null) return false;
-
             var input = inputs.MovementDirection;
 
-            var horizontalCameraForward = new Vector3(cameraTransform.forward.x, 0, cameraTransform.forward.z).normalized;
-            horizontalRotation = Quaternion.LookRotation(horizontalCameraForward);
+            var localMoveDir = new Vector3(input.x, 0, input.y);
 
-            var moveDir = (horizontalRotation * new Vector3(input.x, 0, input.y)).normalized;
-            horizontalVelocity = moveDir * config.MoveSpeed;
+            if (localMoveDir.sqrMagnitude > 0.001f)
+            {
+                localMoveDir.Normalize();
+                horizontalVelocity = localMoveDir * config.MoveSpeed;
+            }
+            else
+            {
+                horizontalVelocity = Vector3.zero;
+            }
 
             return true;
-        }
-
-        public void RotateTowardsMovement()
-        {
-            controller.transform.rotation = horizontalRotation;
         }
     }
 }

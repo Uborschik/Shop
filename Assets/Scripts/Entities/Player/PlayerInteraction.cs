@@ -22,9 +22,9 @@ namespace Game.Entities.Pawns.Player
         private IBody body;
         private RaycastHit hit;
 
-        public void AttachTo(Hand hand, IBody body)
+        public void AttachTo(IBody body)
         {
-            this.hand = hand;
+            this.hand = body.Hand;
             this.body = body;
         }
 
@@ -48,9 +48,15 @@ namespace Game.Entities.Pawns.Player
 
         public void DropItem()
         {
+            var parent = body.Transform.parent;
+            DropItem(parent);
+        }
+
+        private void DropItem(Transform parent)
+        {
             if (hand == null) return;
 
-            hand.DropItem();
+            hand.DropItem(parent);
         }
     }
 }

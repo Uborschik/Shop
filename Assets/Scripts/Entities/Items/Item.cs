@@ -52,9 +52,9 @@ namespace Game.Entities.Items
             SetActivePhysics(false);
         }
 
-        public void OnDrop()
+        public void OnDrop(Transform parent)
         {
-            PushTo(null, transform.position, transform.rotation);
+            PushTo(parent, transform.position, transform.rotation);
             SetActivePhysics(true);
         }
 

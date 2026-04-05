@@ -63,16 +63,8 @@ namespace Game.Entities.Player
             currentBody = body;
             playerCamera.AttachTo(currentBody);
 
-            if (body?.Transform.TryGetComponent(out Hand hand) == true)
-            {
-                playerInteraction.AttachTo(hand, body);
-                SubscribeToInputs();
-            }
-            else
-            {
-                Debug.LogWarning($"No Hand found in {body?.Transform.name}");
-                playerInteraction.AttachTo(null, body);
-            }
+            playerInteraction.AttachTo(body);
+            SubscribeToInputs();
         }
     }
 }

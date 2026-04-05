@@ -10,13 +10,16 @@ namespace Game.Entities.Pawns.Player
     public class Trader : MonoBehaviour, IBody
     {
         [SerializeField] private WalkableMovementConfig movementConfig;
+        [SerializeField] private HandConfig handConfig;
 
+        private Hand hand;
         private WalkableInputs inputs;
         private CharacterController characterController;
         private WalkableMovement movement;
 
         public ControlFlag CurrentFlags { get; private set; }
         public Transform Transform => transform;
+        public Hand Hand => hand;
         public bool IsPhysicsEnabled => characterController.enabled;
 
         private void Awake()
@@ -24,6 +27,7 @@ namespace Game.Entities.Pawns.Player
             inputs = new();
             characterController = GetComponent<CharacterController>();
             movement = new(characterController, inputs, movementConfig);
+            hand = new(this, handConfig);
         }
 
         private void Update()
